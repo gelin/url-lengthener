@@ -39,4 +39,8 @@ public class UrlLengthener {
         }
     }
 
+    private UrlLengthener() {
+        //avoid instantiation
+    }
+
 }
