@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">URL Lengthener</string>
     <string name="lengthened_urls">Share lenghthened URLs to</string>
+    <string name="lengthening">Lengthening...</string>
 </resources>
