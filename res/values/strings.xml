@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">URL Lengthener</string>
+    <string name="app_description">When you share a text with links, do it through this app
+(choose "URL Lengthener" from the list of share target). The app searches URLs in the shared text and
+replaces them with longer versions and then shares the modified text again. So the share targets list
+appears again, choose the actual target now.
+\nNote the app requires Internet access, otherwise URLs stay unmodified.</string>
     <string name="lengthened_urls">Share lenghthened URLs to</string>
     <string name="lengthening">Lengthening...</string>
+    <string name="remove_query">Remove query</string>
 </resources>

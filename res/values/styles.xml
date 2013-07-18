@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Settings" parent="@android:style/TextAppearance">
+        <item name="android:layout_marginLeft">15dip</item>
+        <item name="android:layout_marginRight">6dip</item>
+        <item name="android:layout_marginTop">6dip</item>
+        <item name="android:layout_marginBottom">6dip</item>
+    </style>
+
+    <style name="Settings.Text" parent="@android:style/Widget.TextView">
+        <!--<item name="android:textSize">14sp</item>-->
+        <!--<item name="android:textColor">?android:attr/textColorSecondary</item>-->
+        <!--<item name="android:textAppearance">@android:style/TextAppearance.Small</item>-->
+    </style>
+
+    <style name="Settings.Header" parent="@android:style/Widget.TextView">
+        <!--<item name="android:textAppearance">@android:style/TextAppearance.Large</item>-->
+    </style>
+
+</resources>
