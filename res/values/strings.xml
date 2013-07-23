@@ -9,4 +9,5 @@ appears again, choose the actual target now.
     <string name="lengthened_urls">Share lenghthened URLs to</string>
     <string name="lengthening">Lengthening...</string>
     <string name="remove_query">Remove query</string>
+    <string name="remove_query_for_domains">Remove query part of URLs for domains below</string>
 </resources>
