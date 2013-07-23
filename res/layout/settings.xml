@@ -17,4 +17,11 @@
             style="@style/Settings.Text"
             android:text="@string/remove_query_for_domains"/>
 
+    <ListView android:id="@+id/remove_query_list"
+            style="@style/Settings.Text"/>
+
+    <Button android:id="@+id/remove_query_add"
+            style="@style/Settings.Button"
+            android:text="@string/add_domain"/>
+
 </LinearLayout>

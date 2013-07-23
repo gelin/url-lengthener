@@ -23,4 +23,9 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="Settings.Button" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
