@@ -1,7 +1,6 @@
 package ru.gelin.lengthener;
 
 import android.test.AndroidTestCase;
-import ru.gelin.lengthener.UrlLengthener;
 
 import java.io.IOException;
 
@@ -23,6 +22,13 @@ public class UrlLengthenerTest extends AndroidTestCase {
     public void testFeedsPortal() throws IOException {
         assertEquals("http://www.computerra.ru/73618/choose-a-camera-for-summer-holidays/",
                 UrlLengthener.lengthenUrl("http://rss.feedsportal.com/c/32137/f/413387/s/2e4731a3/l/0L0Scomputerra0Bru0C736180Cchoose0Ea0Ecamera0Efor0Esummer0Eholidays0C/story01.htm"));
+    }
+
+    public void testRemoveQuery() throws IOException {
+        assertEquals("http://www.linux.org.ru/news/openoffice/9393827",
+                UrlLengthener.lengthenUrl(
+                        "http://feedproxy.google.com/~r/org/LOR/~3/PehIerjNU5k/9393827",
+                        TestLengthenerSettings.INSTANCE));
     }
 
 }
