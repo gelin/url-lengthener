@@ -29,4 +29,11 @@ public class TextUrlLengthenerTest extends AndroidTestCase {
                 TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj\nAnother Yandex: http://bit.ly/WQuM"));
     }
 
+    public void testRemoveQuery() throws IOException {
+        assertEquals("LOR: http://www.linux.org.ru/news/openoffice/9393827",
+                TextUrlLengthener.lengthenUrls(
+                        "LOR: http://feedproxy.google.com/~r/org/LOR/~3/PehIerjNU5k/9393827",
+                        TestLengthenerSettings.INSTANCE));
+    }
+
 }

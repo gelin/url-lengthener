@@ -13,12 +13,16 @@ public class TextUrlLengthener {
     static final Pattern URL_PATTERN = Pattern.compile("((http(s)?:\\/\\/)[A-Za-z0-9.-]+((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[.\\!\\/\\\\w]*))?)");
 
     public static String lengthenUrls(String text) {
+        return lengthenUrls(text, DefaultLengthenerSettings.INSTANCE);
+    }
+
+    public static String lengthenUrls(String text, LengthenerSettings settings) {
         Matcher m = URL_PATTERN.matcher(text);
         StringBuffer result = new StringBuffer();
         while (m.find()) {
             String url = m.group();
             try {
-                url = UrlLengthener.lengthenUrl(url);
+                url = UrlLengthener.lengthenUrl(url, settings);
             } catch (IOException e) {
                 //ignoring possible errors
             }
