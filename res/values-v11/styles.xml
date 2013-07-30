@@ -4,17 +4,4 @@
     <style name="Dialog" parent="@android:style/Theme.Holo.Dialog">
     </style>
 
-    <style name="Settings.Header">
-        <item name="android:background">@android:drawable/divider_horizontal_dark</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="Settings.Button" parent="@android:style/Widget.Holo.Button">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
 </resources>

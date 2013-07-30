@@ -23,6 +23,22 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".RemoveQueryDomainsSettingsActivity"
+                  android:label="@string/remove_query_domains">
+            <intent-filter>
+                <action android:name="ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ClickLinkDomainsSettingsActivity"
+                  android:label="@string/click_link_domains">
+            <intent-filter>
+                <action android:name="ru.gelin.lengthener.android.ACTION_SET_CLICK_LINK_DOMAINS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

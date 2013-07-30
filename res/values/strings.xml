@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">URL Lengthener</string>
+    <string name="how_to_use">How to use</string>
     <string name="app_description">When you share a text with links, do it through this app
 (choose "URL Lengthener" from the list of share target). The app searches URLs in the shared text and
 replaces them with longer versions and then shares the modified text again. So the share targets list
@@ -8,6 +9,12 @@ appears again, choose the actual target now.
 \nNote the app requires Internet access, otherwise URLs stay unmodified.</string>
     <string name="lengthened_urls">Share lenghthened URLs to</string>
     <string name="lengthening">Lengthening...</string>
-    <string name="remove_query_for_domains">Remove query part of URLs for domains below</string>
+    <string name="domains">Domains</string>
+    <string name="remove_query">Remove query</string>
+    <string name="remove_query_domains">Remove query domains</string>
+    <string name="remove_query_for_domains">Remove query part of URLs for specified domains</string>
+    <string name="click_link">Click link</string>
+    <string name="click_link_domains">Click link domains</string>
+    <string name="click_link_for_domains">Click first link on a page of specified domains</string>
     <string name="add_domain">Add domain</string>
 </resources>

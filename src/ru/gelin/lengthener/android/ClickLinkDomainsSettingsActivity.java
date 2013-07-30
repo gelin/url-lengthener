@@ -4,15 +4,13 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 /**
- *  Activity with settings.
+ *  Activity to setup domains where to click the first link.
  */
-public class SettingsActivity extends PreferenceActivity {
+public class ClickLinkDomainsSettingsActivity extends PreferenceActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //TODO: tablet support
-        addPreferencesFromResource(R.xml.preferences);
+        //TODO
     }
 
 }
