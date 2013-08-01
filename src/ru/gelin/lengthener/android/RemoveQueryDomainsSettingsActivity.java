@@ -10,7 +10,10 @@ public class RemoveQueryDomainsSettingsActivity extends PreferenceActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO
+        //TODO: pass params to fragment
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new DomainsListFragment())
+                .commit();
     }
 
 }
