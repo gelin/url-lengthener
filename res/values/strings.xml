@@ -17,4 +17,5 @@ appears again, choose the actual target now.
     <string name="click_link_domains">Click link domains</string>
     <string name="click_link_for_domains">Click first link on a page of specified domains</string>
     <string name="add_domain">Add domain</string>
+    <string name="add">Add</string>
 </resources>
