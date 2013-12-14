@@ -5,9 +5,11 @@ import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
-import android.view.*;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -47,19 +49,7 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
         if (this.prefsPrefix == null) {
             this.prefsPrefix = DEFAULT_PREFS_PREFIX;
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.domains_list, container, false);
-        Button addButton = (Button)result.findViewById(R.id.button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addDomain();
-            }
-        });
-        return result;
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -70,6 +60,22 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
         ListView list = getListView();
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         list.setMultiChoiceModeListener(new ChoiceListener());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.domains_action, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                addDomain();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     void addDomain() {

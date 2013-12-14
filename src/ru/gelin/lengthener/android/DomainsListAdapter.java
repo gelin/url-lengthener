@@ -67,11 +67,11 @@ public class DomainsListAdapter extends BaseAdapter {
     }
 
     View inflateView(ViewGroup parent) {
-        return LayoutInflater.from(this.context).inflate(R.layout.domain_list_item, parent, false);
+        return LayoutInflater.from(this.context).inflate(android.R.layout.simple_list_item_2, parent, false);
     }
 
     void bindView(View view, int i) {
-        TextView text = (TextView) view.findViewById(R.id.domain);
+        TextView text = (TextView) view.findViewById(android.R.id.text1);
         text.setText(this.domains.get(i));
     }
 
