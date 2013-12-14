@@ -5,6 +5,9 @@ import ru.gelin.lengthener.LengthenerSettings;
 
 import java.util.Set;
 
+/**
+ *  Lengthener settings taken from the android application preferences.
+ */
 public class AndroidLengthenerSettings implements LengthenerSettings {
 
     public static String REMOVE_QUERY_DOMAINS_PREFIX = "remove_query_domains_";

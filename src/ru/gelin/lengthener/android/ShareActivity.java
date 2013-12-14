@@ -40,7 +40,7 @@ public class ShareActivity extends Activity {
 
         @Override
         protected String doInBackground(String... strings) {
-            return TextUrlLengthener.lengthenUrls(strings[0]);
+            return TextUrlLengthener.lengthenUrls(strings[0], new AndroidLengthenerSettings(ShareActivity.this));
         }
 
         @Override

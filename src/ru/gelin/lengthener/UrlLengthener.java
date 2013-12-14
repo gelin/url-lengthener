@@ -15,7 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- *  Lengthen one URL
+ *  Lengthens one URL
  */
 public class UrlLengthener {
 
