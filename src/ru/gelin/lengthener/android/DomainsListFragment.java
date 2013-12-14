@@ -4,11 +4,15 @@ import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.SparseBooleanArray;
+import android.view.*;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *  A PreferenceFragment which allows to add and remove domains (as strings) to/from the list.
@@ -62,6 +66,10 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setListAdapter(new DomainsListAdapter(getActivity(), this.prefsPrefix));
+
+        ListView list = getListView();
+        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        list.setMultiChoiceModeListener(new ChoiceListener());
     }
 
     void addDomain() {
@@ -89,6 +97,57 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
             return;
         }
         adapter.addDomain(newDomain);
+    }
+
+    void deleteSelectedDomains() {
+        DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+        if (adapter == null) {
+            return;
+        }
+        Collection<Integer> toRemove = new ArrayList<Integer>();
+        SparseBooleanArray positions = getListView().getCheckedItemPositions();
+        for (int i = 0; i < positions.size(); i++) {
+            if (positions.get(i)) {
+                toRemove.add(i);
+            }
+        }
+        adapter.deleteDomains(toRemove);
+    }
+
+    private class ChoiceListener implements AbsListView.MultiChoiceModeListener {
+
+        @Override
+        public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
+            actionMode.setTitle(String.valueOf(getListView().getCheckedItemCount()));
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            MenuInflater inflater = actionMode.getMenuInflater();
+            inflater.inflate(R.menu.domains_context, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;   //nothing to do
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_delete:
+                    deleteSelectedDomains();
+                    actionMode.finish();
+                    return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode actionMode) {
+            //nothing to do
+        }
     }
 
 }

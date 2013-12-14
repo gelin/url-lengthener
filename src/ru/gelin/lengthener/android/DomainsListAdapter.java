@@ -26,7 +26,7 @@ public class DomainsListAdapter extends BaseAdapter {
         readDomains();
     }
 
-    void readDomains() {
+    synchronized void readDomains() {
         this.domains.clear();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         int i = 0;
@@ -75,7 +75,7 @@ public class DomainsListAdapter extends BaseAdapter {
         text.setText(this.domains.get(i));
     }
 
-    public void addDomain(String newDomain) {
+    public synchronized void addDomain(String newDomain) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key(getCount()), newDomain);
@@ -84,10 +84,20 @@ public class DomainsListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public Set<String> getDomains() {
+    public synchronized Set<String> getDomains() {
         Set<String> result = new TreeSet<String>();
         result.addAll(this.domains);
         return result;
+    }
+
+    public synchronized void deleteDomains(Collection<Integer> positions) {
+        List<String> toRemove = new ArrayList<String>();
+        for (int position : positions) {
+            toRemove.add(this.domains.get(position));
+        }
+        for (String domain : toRemove) {
+            this.domains.remove(domain);
+        }
     }
 
 }
