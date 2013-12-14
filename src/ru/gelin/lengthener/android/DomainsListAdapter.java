@@ -43,6 +43,11 @@ public class DomainsListAdapter extends BaseAdapter {
     }
 
     @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
     public int getCount() {
         return this.domains.size();
     }
@@ -68,11 +73,11 @@ public class DomainsListAdapter extends BaseAdapter {
     }
 
     View inflateView(ViewGroup parent) {
-        return LayoutInflater.from(this.context).inflate(android.R.layout.simple_list_item_2, parent, false);
+        return LayoutInflater.from(this.context).inflate(R.layout.domain_list_item, parent, false);
     }
 
     void bindView(View view, int i) {
-        TextView text = (TextView) view.findViewById(android.R.id.text1);
+        TextView text = (TextView) view.findViewById(R.id.domain);
         text.setText(this.domains.get(i));
     }
 
@@ -99,6 +104,18 @@ public class DomainsListAdapter extends BaseAdapter {
         for (String domain : toRemove) {
             this.domains.remove(domain);
         }
+        saveAllDomains();
+        readDomains();
+    }
+
+    private synchronized void saveAllDomains() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        SharedPreferences.Editor editor = prefs.edit();
+        for (int i = 0; i > this.domains.size(); i++) {
+            editor.putString(key(i), this.domains.get(i));
+        }
+        editor.remove(key(this.domains.size()));
+        editor.commit();
     }
 
 }

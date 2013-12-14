@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -110,12 +109,10 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
         if (adapter == null) {
             return;
         }
+        long[] checked = getListView().getCheckedItemIds();
         Collection<Integer> toRemove = new ArrayList<Integer>();
-        SparseBooleanArray positions = getListView().getCheckedItemPositions();
-        for (int i = 0; i < positions.size(); i++) {
-            if (positions.get(i)) {
-                toRemove.add(i);
-            }
+        for (long id : checked) {
+            toRemove.add((int) id);
         }
         adapter.deleteDomains(toRemove);
     }
