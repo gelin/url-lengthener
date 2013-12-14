@@ -81,6 +81,7 @@ public class DomainsListAdapter extends BaseAdapter {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key(getCount()), newDomain);
+        editor.commit();
         readDomains();
         notifyDataSetChanged();
     }
