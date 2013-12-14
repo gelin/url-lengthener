@@ -3,8 +3,9 @@
     <string name="app_name">URL Lengthener</string>
     <string name="how_to_use">How to use</string>
     <string name="app_description">When you share a text with links, do it through this app
-(choose "URL Lengthener" from the list of share target). The app searches URLs in the shared text and
-replaces them with longer versions and then shares the modified text again. So the share targets list
+(choose \"URL Lengthener\" from the list of share target).
+\nThe app searches URLs in the shared text and
+replaces them with longer versions and then shares the modified text again. So then the share targets list
 appears again, choose the actual target now.
 \nNote the app requires Internet access, otherwise URLs stay unmodified.</string>
     <string name="lengthened_urls">Share lenghthened URLs to</string>

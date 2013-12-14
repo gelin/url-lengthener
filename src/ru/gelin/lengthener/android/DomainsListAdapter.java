@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  *  A ListAdapter which reads the list of domain names from SharedPreferences.
@@ -84,6 +82,12 @@ public class DomainsListAdapter extends BaseAdapter {
         editor.commit();
         readDomains();
         notifyDataSetChanged();
+    }
+
+    public Set<String> getDomains() {
+        Set<String> result = new TreeSet<String>();
+        result.addAll(this.domains);
+        return result;
     }
 
 }

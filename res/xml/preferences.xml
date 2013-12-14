@@ -17,11 +17,11 @@
             <intent android:action="ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"/>
         </Preference>
 
-        <Preference
-                android:title="@string/click_link"
-                android:summary="@string/click_link_for_domains">
-            <intent android:action="ru.gelin.lengthener.android.ACTION_SET_CLICK_LINK_DOMAINS"/>
-        </Preference>
+        <!--<Preference-->
+                <!--android:title="@string/click_link"-->
+                <!--android:summary="@string/click_link_for_domains">-->
+            <!--<intent android:action="ru.gelin.lengthener.android.ACTION_SET_CLICK_LINK_DOMAINS"/>-->
+        <!--</Preference>-->
 
     </PreferenceCategory>
 

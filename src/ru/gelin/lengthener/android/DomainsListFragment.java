@@ -24,6 +24,16 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
 
     EditText newDomain;
 
+    public static DomainsListFragment newInstance(String prefsPrefix) {
+        DomainsListFragment fragment = new DomainsListFragment();
+
+        Bundle args = new Bundle();
+        args.putString(PREFS_PREFIX, prefsPrefix);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
