@@ -30,11 +30,12 @@ public class DomainsListAdapter extends BaseAdapter {
         this.domains.clear();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         int i = 0;
+        Set<String> domains = new TreeSet<String>();
         while (prefs.contains(key(i))) {
-            this.domains.add(prefs.getString(key(i), ""));
+            domains.add(prefs.getString(key(i), ""));
             i++;
         }
-        Collections.sort(this.domains);
+        this.domains.addAll(domains);
     }
 
     String key(int index) {
