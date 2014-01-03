@@ -4,11 +4,9 @@ import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.*;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -56,9 +54,15 @@ public class DomainsListFragment extends ListFragment implements DialogInterface
         super.onActivityCreated(savedInstanceState);
         setListAdapter(new DomainsListAdapter(getActivity(), this.prefsPrefix));
 
-        ListView list = getListView();
+        final ListView list = getListView();
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         list.setMultiChoiceModeListener(new ChoiceListener());
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                list.setItemChecked(position, true);
+            }
+        });
     }
 
     @Override
