@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/settings"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+
+    <fragment android:id="@+id/settings_list"
+            android:layout_width="320dp"
+            android:layout_height="fill_parent"
+            class="ru.gelin.lengthener.android.SettingsFragment">
+    </fragment>
+    <fragment android:id="@+id/settings_details"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            class="ru.gelin.lengthener.android.DomainsListFragment">
+    </fragment>
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ru.gelin.android.preference.BigSummaryPreference
+            android:title="@string/how_to_use"
+            android:summary="@string/app_description"
+            android:selectable="false"
+            android:persistent="false" />
+
+    <PreferenceCategory
+            android:title="@string/domains">
+
+        <Preference
+                android:title="@string/remove_query"
+                android:summary="@string/remove_query_for_domains">
+        </Preference>
+
+        <!--<Preference-->
+                <!--android:title="@string/click_link"-->
+                <!--android:summary="@string/click_link_for_domains">-->
+        <!--</Preference>-->
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
