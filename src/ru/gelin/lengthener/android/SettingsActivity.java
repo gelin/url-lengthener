@@ -12,10 +12,11 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         //TODO: tablet support
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content,
-                        SettingsFragment.newInstance())
-                .commit();
+//        getFragmentManager().beginTransaction()
+//                .replace(android.R.id.content,
+//                        SettingsFragment.newInstance())
+//                .commit();
+        setContentView(R.layout.settings_activity);
     }
 
 }
