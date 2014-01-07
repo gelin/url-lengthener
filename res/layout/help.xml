@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+        <TextView
+                style="@style/Help.Text"
+                android:text="@string/help_1_share"/>
+
+        <ImageView
+                style="@style/Help.Image"
+                android:src="@drawable/help_1_share_button"/>
+
+        <TextView
+                style="@style/Help.Text"
+                android:text="@string/help_2_choose_lengthener"/>
+
+        <ImageView
+                style="@style/Help.Image"
+                android:src="@drawable/help_2_share_list"/>
+
+        <TextView
+                style="@style/Help.Text"
+                android:text="@string/help_3_processing"/>
+
+        <ImageView
+                style="@style/Help.Image"
+                android:src="@drawable/help_3_progress"/>
+
+        <TextView
+                style="@style/Help.Text"
+                android:text="@string/help_4_share_again"/>
+
+        <ImageView
+                style="@style/Help.Image"
+                android:src="@drawable/help_4_share_list"/>
+
+        <TextView
+                style="@style/Help.Text"
+                android:text="@string/help_5_shared"/>
+
+        <ImageView
+                style="@style/Help.Image"
+                android:src="@drawable/help_5_email"/>
+
+    </LinearLayout>
+</ScrollView>

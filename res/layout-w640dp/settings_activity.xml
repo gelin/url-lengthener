@@ -11,10 +11,11 @@
             android:layout_height="fill_parent"
             class="ru.gelin.lengthener.android.SettingsFragment">
     </fragment>
+
     <fragment android:id="@+id/settings_details"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            class="ru.gelin.lengthener.android.DomainsListFragment">
+            class="ru.gelin.lengthener.android.HelpFragment">
     </fragment>
 
 </LinearLayout>
