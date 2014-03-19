@@ -5,16 +5,17 @@
     <ru.gelin.android.preference.BigSummaryPreference
             android:title="@string/how_to_use"
             android:summary="@string/app_description"
-            android:selectable="false"
+            android:key="help"
             android:persistent="false" />
 
     <PreferenceCategory
             android:title="@string/domains">
 
-        <Preference
+        <ru.gelin.android.preference.BigSummaryPreference
                 android:title="@string/remove_query"
-                android:summary="@string/remove_query_for_domains">
-        </Preference>
+                android:summary="@string/remove_query_for_domains"
+                android:key="remove_query_domains"
+                android:persistent="false"/>
 
         <!--<Preference-->
                 <!--android:title="@string/click_link"-->

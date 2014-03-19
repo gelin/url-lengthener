@@ -14,7 +14,8 @@
 
         <ru.gelin.android.preference.BigSummaryPreference
                 android:title="@string/remove_query"
-                android:summary="@string/remove_query_for_domains">
+                android:summary="@string/remove_query_for_domains"
+                android:persistent="false">
             <intent android:action="ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"/>
         </ru.gelin.android.preference.BigSummaryPreference>
 
