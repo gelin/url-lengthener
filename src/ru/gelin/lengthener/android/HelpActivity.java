@@ -1,20 +1,16 @@
 package ru.gelin.lengthener.android;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 
-/**
- *  Activity to setup domains where to remove query.
- */
-public class RemoveQueryDomainsSettingsActivity extends PreferenceActivity {
+public class HelpActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content,
-                        DomainsListFragment.newInstance(AndroidLengthenerSettings.REMOVE_QUERY_DOMAINS_PREFIX))
+                .replace(android.R.id.content, HelpFragment.newInstance())
                 .commit();
     }
 

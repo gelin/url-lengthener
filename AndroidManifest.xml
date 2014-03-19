@@ -30,6 +30,8 @@
                 <action android:name="ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".SettingsActivity"/>
         </activity>
 
         <activity android:name=".ClickLinkDomainsSettingsActivity"
@@ -38,6 +40,18 @@
                 <action android:name="ru.gelin.lengthener.android.ACTION_SET_CLICK_LINK_DOMAINS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".SettingsActivity"/>
+        </activity>
+
+        <activity android:name=".HelpActivity"
+                  android:label="@string/how_to_use">
+            <intent-filter>
+                <action android:name="ru.gelin.lengthener.android.ACTION_HELP"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".SettingsActivity"/>
         </activity>
 
     </application>
