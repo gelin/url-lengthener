@@ -86,6 +86,16 @@ public class SettingsListAdapter extends BaseAdapter {
     }
 
     @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return getSettingsItem(position).viewType == PREFERENCE_VIEW;
+    }
+
+    @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         SettingsListItem item = getSettingsItem(position);
         if (view == null) {
@@ -113,14 +123,10 @@ public class SettingsListAdapter extends BaseAdapter {
         TextView summary = null;
         switch (item.viewType) {
             case PREFERENCE_VIEW:
-                view.setClickable(true);
-                view.setFocusable(true);
                 title = (TextView)view.findViewById(android.R.id.title);
                 summary = (TextView)view.findViewById(android.R.id.summary);
                 break;
             case HEADER_VIEW:
-                view.setClickable(false);
-                view.setFocusable(false);
                 title = (TextView)view.findViewById(android.R.id.title);
                 break;
         }
