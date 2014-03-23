@@ -25,10 +25,12 @@ public class SettingsFragment extends ListFragment {
         ListView listView = getListView();
         listView.setDividerHeight(0);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        if (savedInstanceState != null) {
-            onListItemClick(getListView(), savedInstanceState.getInt(SELECTED_ITEM_KEY, SELECTED_ITEM_DEFAULT));
-        } else {
-            onListItemClick(getListView(), SELECTED_ITEM_DEFAULT);
+        if (getResources().getBoolean(R.bool.dual_pane)) {
+            if (savedInstanceState != null) {
+                onListItemClick(getListView(), savedInstanceState.getInt(SELECTED_ITEM_KEY, SELECTED_ITEM_DEFAULT));
+            } else {
+                onListItemClick(getListView(), SELECTED_ITEM_DEFAULT);
+            }
         }
     }
 
