@@ -1,12 +1,12 @@
 package ru.gelin.lengthener.android;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 /**
  *  Activity with settings.
  */
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

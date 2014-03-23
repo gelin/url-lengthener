@@ -1,9 +1,9 @@
 package ru.gelin.lengthener.android;
 
 import android.app.AlertDialog;
-import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.*;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
