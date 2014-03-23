@@ -32,11 +32,11 @@ public class SettingsFragment extends ListFragment {
         SettingsListAdapter adapter = (SettingsListAdapter)getListAdapter();
         SettingsListAdapter.SettingsListItem item = adapter.getSettingsItem(position);
         if (getResources().getBoolean(R.bool.dual_pane)) {
+            listView.setItemChecked(position, true);
             showFragment(item.fragment);
         } else {
             startIntent(item.intent);
         }
-        listView.setItemChecked(position, true);
     }
 
     void showFragment(Fragment fragment) {

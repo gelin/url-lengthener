@@ -53,22 +53,22 @@ public class DomainsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return this.domains.get(i);
+    public Object getItem(int position) {
+        return this.domains.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = inflateView(parent);
         }
-        bindView(view, i);
+        bindView(view, position);
         return view;
     }
 
@@ -76,9 +76,9 @@ public class DomainsListAdapter extends BaseAdapter {
         return LayoutInflater.from(this.context).inflate(R.layout.domain_list_item, parent, false);
     }
 
-    void bindView(View view, int i) {
+    void bindView(View view, int position) {
         TextView text = (TextView) view.findViewById(R.id.domain);
-        text.setText(this.domains.get(i));
+        text.setText(this.domains.get(position));
     }
 
     public synchronized void addDomain(String newDomain) {

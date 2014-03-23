@@ -96,16 +96,17 @@ public class SettingsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         SettingsListItem item = getSettingsItem(position);
+        View view = convertView;
         if (view == null) {
-            view = inflateView(item, viewGroup);
+            view = inflateView(item, parent);
         }
         bindView(view, item);
         return view;
     }
 
-    View inflateView(SettingsListItem item, ViewGroup viewGroup) {
+    View inflateView(SettingsListItem item, ViewGroup parent) {
         int layout = 0;
         switch (item.viewType) {
             case PREFERENCE_VIEW:
@@ -115,7 +116,7 @@ public class SettingsListAdapter extends BaseAdapter {
                 layout = android.R.layout.preference_category;
                 break;
         }
-        return LayoutInflater.from(this.context).inflate(layout, viewGroup, false);
+        return LayoutInflater.from(this.context).inflate(layout, parent, false);
     }
 
     void bindView(View view, SettingsListItem item) {
