@@ -67,6 +67,12 @@ public class SettingsListAdapter extends BaseAdapter {
     }
 
     SettingsListItem getSettingsItem(int position) {
+        if (position < 0) {
+            return null;
+        }
+        if (position >= ITEMS.length) {
+            return null;
+        }
         return ITEMS[position];
     }
 
