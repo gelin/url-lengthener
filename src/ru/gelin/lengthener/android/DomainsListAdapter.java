@@ -106,6 +106,7 @@ public class DomainsListAdapter extends BaseAdapter {
         }
         saveAllDomains();
         readDomains();
+        notifyDataSetChanged();
     }
 
     private synchronized void saveAllDomains() {

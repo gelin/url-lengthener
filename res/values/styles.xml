@@ -21,7 +21,8 @@
     <style name="Dialog" parent="@android:style/Theme.Dialog">
     </style>
 
-    <style name="activated">
+    <style name="activated" parent="@style/Theme.AppCompat.Light">
+        <item name="android:background">@android:drawable/list_selector_background</item>
     </style>
 
     <style name="Help">
