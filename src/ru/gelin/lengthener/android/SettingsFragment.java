@@ -46,15 +46,15 @@ public class SettingsFragment extends ListFragment {
     }
 
     void onListItemClick(ListView listView, int position) {
-        if (this.selectedItem == position) {
-            return;
-        }
         SettingsListAdapter adapter = (SettingsListAdapter)getListAdapter();
         SettingsListAdapter.SettingsListItem item = adapter.getSettingsItem(position);
         if (item == null) {
             return;
         }
         if (getResources().getBoolean(R.bool.dual_pane)) {
+            if (this.selectedItem == position) {
+                return;
+            }
             listView.setItemChecked(position, true);
             showFragment(item.fragment);
         } else {
@@ -76,6 +76,7 @@ public class SettingsFragment extends ListFragment {
         if (intent == null) {
             return;
         }
+//        Log.d(Tag.TAG, "starting settings activity: " + intent);
         startActivity(intent);
     }
 
