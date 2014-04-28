@@ -24,27 +24,20 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
         super.onActivityCreated(savedInstanceState);
 
         final ListView list = getListView();
-        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        final DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+        list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if (DomainsListFragmentCompat.this.actionMode == null) {
                     ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionModeCallback());
                 } else {
-                    DomainsListFragmentCompat.this.actionMode.setTitle(String.valueOf(getCheckedItemCount(list)));
+                    DomainsListFragmentCompat.this.actionMode.setTitle(String.valueOf(adapter.getCheckedCount()));
                 }
+                adapter.setChecked(position, true);
                 list.setItemChecked(position, true);
             }
         });
-    }
-
-    int getCheckedItemCount(ListView list) {
-        long[] checked = list.getCheckedItemIds();
-        if (checked != null) {
-            return checked.length;
-        } else {
-            return 0;
-        }
     }
 
     private class ActionModeCallback implements ActionMode.Callback {
@@ -54,7 +47,8 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
             DomainsListFragmentCompat.this.actionMode = actionMode;
             MenuInflater inflater = actionMode.getMenuInflater();
             inflater.inflate(R.menu.domains_context, menu);
-            actionMode.setTitle(String.valueOf(getCheckedItemCount(getListView())));
+            DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+            actionMode.setTitle(String.valueOf(adapter.getCheckedCount()));
             return true;
         }
 

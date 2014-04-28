@@ -22,7 +22,7 @@
     </style>
 
     <style name="activated" parent="@style/Theme.AppCompat.Light">
-        <item name="android:background">@android:drawable/list_selector_background</item>
+        <item name="android:background">@drawable/list_selector_background</item>
     </style>
 
     <style name="Help">

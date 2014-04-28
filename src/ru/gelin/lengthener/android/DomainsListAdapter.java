@@ -2,6 +2,7 @@ package ru.gelin.lengthener.android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ public class DomainsListAdapter extends BaseAdapter {
     final String prefsPrefix;
     final Context context;
     final List<String> domains = new ArrayList<String>();
+    final List<Boolean> checked = new ArrayList<Boolean>();
 
     public DomainsListAdapter(Context context, String prefsPrefix) {
         this.prefsPrefix = prefsPrefix;
@@ -28,11 +30,13 @@ public class DomainsListAdapter extends BaseAdapter {
 
     synchronized void readDomains() {
         this.domains.clear();
+        this.checked.clear();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         int i = 0;
         Set<String> domains = new TreeSet<String>();
         while (prefs.contains(key(i))) {
             domains.add(prefs.getString(key(i), ""));
+            this.checked.add(false);
             i++;
         }
         this.domains.addAll(domains);
@@ -62,6 +66,24 @@ public class DomainsListAdapter extends BaseAdapter {
         return position;
     }
 
+    public void setChecked(int position, boolean checked) {
+        this.checked.set(position, checked);
+    }
+
+    public boolean isChecked(int position) {
+        return this.checked.get(position);
+    }
+
+    public int getCheckedCount() {
+        int count = 0;
+        for (boolean checked : this.checked) {
+            if (checked) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -79,6 +101,14 @@ public class DomainsListAdapter extends BaseAdapter {
     void bindView(View view, int position) {
         TextView text = (TextView) view.findViewById(R.id.domain);
         text.setText(this.domains.get(position));
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            if (isChecked(position)) {
+                view.setBackgroundResource(R.drawable.list_highlight);
+            } else {
+                view.setBackgroundResource(R.drawable.list_selector_background);
+            }
+        }
     }
 
     public synchronized void addDomain(String newDomain) {
