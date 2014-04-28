@@ -1,18 +1,29 @@
 package ru.gelin.lengthener.android;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 public class HelpActivity extends ActionBarActivity {
 
+    HelpFragment fragment;
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, HelpFragment.newInstance())
+                .replace(android.R.id.content, getFragment())
                 .commit();
+    }
+
+    Fragment getFragment() {
+        if (this.fragment == null) {
+            this.fragment = HelpFragment.newInstance();
+        }
+        return this.fragment;
     }
 
     @Override
