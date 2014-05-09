@@ -22,6 +22,7 @@ appears again, choose the actual target now.
     <string name="cannot_lengthen">Cannot lengthen urls</string>
     <string name="not_lengthened_urls">Share original URLs to</string>
     <string name="delete_domains">Delete domains</string>
+    <string name="no_domains">No domains.\nChoose \"Add domain\" menu item to add one.</string>
 
     <string name="help_1_share">Share a text with links from your RSS reader or any other application.</string>
     <string name="help_2_choose_lengthener">Choose \"URL Lengthener\" from the list of share targets.</string>

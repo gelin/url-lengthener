@@ -55,6 +55,12 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setEmptyText(getString(R.string.no_domains));
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.domains_action, menu);
     }
