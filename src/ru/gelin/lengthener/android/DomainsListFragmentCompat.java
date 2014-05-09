@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  *  A Fragment which allows to add and remove domains (as strings) to/from the list.
  *  This version of the fragment works on devices with API < 11
@@ -22,20 +25,26 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setListAdapter(new DomainsListAdapterCompat(getActivity(), this.prefsPrefix));
 
         final ListView list = getListView();
-        final DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+        final DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
         list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                adapter.toggleChecked(position);
+//                list.setItemChecked(position, true);
                 if (DomainsListFragmentCompat.this.actionMode == null) {
                     ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionModeCallback());
                 } else {
-                    DomainsListFragmentCompat.this.actionMode.setTitle(String.valueOf(adapter.getCheckedCount()));
+                    int checkedCount = adapter.getCheckedCount();
+                    if (checkedCount == 0) {
+                        DomainsListFragmentCompat.this.actionMode.finish();
+                    } else {
+                        DomainsListFragmentCompat.this.actionMode.setTitle(String.valueOf(checkedCount));
+                    }
                 }
-                adapter.setChecked(position, true);
-                list.setItemChecked(position, true);
             }
         });
     }
@@ -47,7 +56,7 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
             DomainsListFragmentCompat.this.actionMode = actionMode;
             MenuInflater inflater = actionMode.getMenuInflater();
             inflater.inflate(R.menu.domains_context, menu);
-            DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+            DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
             actionMode.setTitle(String.valueOf(adapter.getCheckedCount()));
             return true;
         }
@@ -71,7 +80,22 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             DomainsListFragmentCompat.this.actionMode = null;
+            DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
+            adapter.clearChecked();
         }
+    }
+
+    void deleteSelectedDomains() {
+        DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+        if (adapter == null) {
+            return;
+        }
+        long[] checked = getListView().getCheckedItemIds();
+        Collection<Integer> toRemove = new ArrayList<Integer>();
+        for (long id : checked) {
+            toRemove.add((int) id);
+        }
+        adapter.deleteDomains(toRemove);
     }
 
 }

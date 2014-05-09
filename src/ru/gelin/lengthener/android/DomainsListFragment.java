@@ -17,6 +17,7 @@ public class DomainsListFragment extends DomainsListFragmentBase {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setListAdapter(new DomainsListAdapter(getActivity(), this.prefsPrefix));
 
         final ListView list = getListView();
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
