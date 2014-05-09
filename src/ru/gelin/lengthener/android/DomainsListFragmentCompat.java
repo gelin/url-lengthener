@@ -86,16 +86,19 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
     }
 
     void deleteSelectedDomains() {
-        DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+        DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
         if (adapter == null) {
             return;
         }
-        long[] checked = getListView().getCheckedItemIds();
         Collection<Integer> toRemove = new ArrayList<Integer>();
-        for (long id : checked) {
-            toRemove.add((int) id);
+        synchronized (adapter) {
+            for (int i = 0; i < adapter.getCount(); i++) {
+                if (adapter.isChecked(i)) {
+                    toRemove.add(i);
+                }
+            }
+            adapter.deleteDomains(toRemove);
         }
-        adapter.deleteDomains(toRemove);
     }
 
 }
