@@ -99,6 +99,7 @@ public class DomainsListAdapter extends BaseAdapter {
     }
 
     public synchronized void deleteDomains(Collection<Integer> positions) {
+        int origSize = this.domains.size();
         List<String> toRemove = new ArrayList<String>();
         for (int position : positions) {
             toRemove.add(this.domains.get(position));
@@ -106,18 +107,20 @@ public class DomainsListAdapter extends BaseAdapter {
         for (String domain : toRemove) {
             this.domains.remove(domain);
         }
-        saveAllDomains();
+        saveAllDomains(origSize);
         readDomains();
         notifyDataSetChanged();
     }
 
-    private synchronized void saveAllDomains() {
+    private synchronized void saveAllDomains(int origSize) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         SharedPreferences.Editor editor = prefs.edit();
-        for (int i = 0; i > this.domains.size(); i++) {
+        for (int i = 0; i < this.domains.size(); i++) {
             editor.putString(key(i), this.domains.get(i));
         }
-        editor.remove(key(this.domains.size()));
+        for (int j = this.domains.size(); j < origSize; j++) {
+            editor.remove(key(j));
+        }
         editor.commit();
     }
 

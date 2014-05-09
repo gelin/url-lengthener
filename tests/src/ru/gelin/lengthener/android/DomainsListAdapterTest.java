@@ -6,6 +6,8 @@ import android.test.AndroidTestCase;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class DomainsListAdapterTest extends AndroidTestCase {
 
     DomainsListAdapter adapter;
@@ -37,6 +39,17 @@ public class DomainsListAdapterTest extends AndroidTestCase {
         View view = this.adapter.getView(0, null, null);
         TextView text = (TextView)view.findViewById(R.id.domain);
         assertEquals("gelin.ru", text.getText());
+    }
+
+    public void testAddAfterDeletion() {
+        assertEquals(2, this.adapter.getCount());
+        ArrayList<Integer> toRemove = new ArrayList<Integer>();
+        toRemove.add(0);
+        toRemove.add(1);
+        this.adapter.deleteDomains(toRemove);
+        assertEquals(0, this.adapter.getCount());
+        this.adapter.addDomain("google.com");
+        assertEquals(1, this.adapter.getCount());
     }
 
 }
