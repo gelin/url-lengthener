@@ -1,6 +1,7 @@
 package ru.gelin.lengthener.android;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -78,11 +80,13 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
 
     void addDomain() {
         this.newDomain = new EditText(getActivity());
-        new AlertDialog.Builder(getActivity())
+        Dialog dialog = new AlertDialog.Builder(getActivity())
             .setTitle(R.string.add_domain)
             .setView(this.newDomain)
             .setPositiveButton(R.string.add, this)
-            .setNegativeButton(android.R.string.cancel, null).create().show();
+            .setNegativeButton(android.R.string.cancel, null).create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        dialog.show();
     }
 
     @Override
