@@ -3,3 +3,5 @@ syntax: glob
 gen/*
 out/*
 tests/local.properties
+local.properties
+bin/*
