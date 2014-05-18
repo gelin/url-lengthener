@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="url-lengthener-android" default="all">
+
+    <property file="local.properties"/>
+    <property file="upload.credentials.properties"/>
+    <xmlproperty file="AndroidManifest.xml"/>
+
+    <taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" name="gcupload"
+	classpath="${sdk.dir}/ant-googlecode-0.0.3.jar"/>
+
+    <target name="all" depends="debug, release"/>
+
+    <target name="debug" description="Upload url-lengthener-android-debug.apk">
+
+	<!--<gcupload -->
+	    <!--username="${gc.username}"-->
+	    <!--password="${gc.password}"-->
+    	    <!--projectname="url-lengthener-android"-->
+    	    <!--filename="bin/url-lengthener-android-debug.apk"-->
+    	    <!--targetfilename="url-lengthener-android-${manifest(android:versionName)}-${manifest(android:versionCode)}-debug.apk"-->
+    	    <!--summary="Latest build (${manifest(android:versionName)}, signed by debug key)"-->
+    	    <!--labels="Type-Package, OpSys-Android_2.2" />-->
+
+	<copy file="bin/url-lengthener-android-debug.apk"
+	    todir="/home/gelin/Dropbox/android@gelin"/>
+    
+    </target>
+    
+    <target name="release" description="Upload url-lengthener-android.apk">
+
+	<copy file="bin/url-lengthener-android-release.apk"
+	    tofile="bin/url-lengthener-android.apk"/>
+
+	<!--<gcupload -->
+	    <!--username="${gc.username}"-->
+	    <!--password="${gc.password}"-->
+    	    <!--projectname="url-lengthener-android"-->
+    	    <!--filename="bin/url-lengthener-android.apk"-->
+    	    <!--targetfilename="url-lengthener-android-${manifest(android:versionName)}-${manifest(android:versionCode)}.apk"-->
+    	    <!--summary="Latest build (${manifest(android:versionName)})"-->
+    	    <!--labels="Featured, Type-Package, OpSys-Android_2.2" />-->
+
+	<copy file="bin/url-lengthener-android.apk"
+	    todir="/home/gelin/Dropbox/android@gelin"/>
+    
+    </target>
+
+</project>
