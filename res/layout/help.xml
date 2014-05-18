@@ -47,7 +47,7 @@
 
         <ImageView
                 style="@style/Help.Image"
-                android:src="@drawable/help_5_email"/>
+                android:src="@drawable/help_5_gplus"/>
 
     </LinearLayout>
 </ScrollView>
