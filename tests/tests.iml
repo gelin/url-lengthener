@@ -4,6 +4,9 @@
     <facet type="android" name="Android">
       <configuration>
         <option name="PACK_TEST_CODE" value="true" />
+        <proGuardCfgFiles>
+          <file>file:///opt/android-sdk/tools/proguard/proguard-android.txt</file>
+        </proGuardCfgFiles>
         <option name="UPDATE_PROPERTY_FILES" value="true" />
       </configuration>
     </facet>
@@ -19,4 +22,3 @@
     <orderEntry type="module" module-name="url-lengthener-android" scope="PROVIDED" />
   </component>
 </module>
-

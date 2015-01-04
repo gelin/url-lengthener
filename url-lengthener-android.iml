@@ -3,6 +3,9 @@
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
+        <proGuardCfgFiles>
+          <file>file:///opt/android-sdk/tools/proguard/proguard-android.txt</file>
+        </proGuardCfgFiles>
         <option name="UPDATE_PROPERTY_FILES" value="true" />
       </configuration>
     </facet>
@@ -16,7 +19,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="appcompat" />
-    <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="library" name="android-support-v7" level="project" />
   </component>
 </module>
-
