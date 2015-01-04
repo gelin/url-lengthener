@@ -11,6 +11,11 @@ The tool is to expand (lengthen) URLs in shared text
 which you send from your Twitter or RSS reader application to email, chat, etc.
 You should just pass the text through the "lengthener".
 
+Download
+--------
+
+* [Google Play](https://play.google.com/store/apps/details?id=ru.gelin.lengthener.android)
+
 Screenshots
 -----------
 
