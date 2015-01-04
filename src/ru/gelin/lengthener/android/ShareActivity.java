@@ -76,6 +76,7 @@ public class ShareActivity extends Activity {
         @Override
         protected void onPostExecute(String text) {
             Intent newIntent = new Intent(getIntent());
+            newIntent.setComponent(null);   //erase the specific component if was explicitly targeted to this app
             newIntent.putExtra(Intent.EXTRA_TEXT, text);
             startActivity(Intent.createChooser(newIntent, getString(R.string.lengthened_urls)));
             finish();
