@@ -5,4 +5,5 @@ out/*
 tests/local.properties
 local.properties
 bin/*
-upload.credentials.properties
+upload.credentials
+cookies.txt
