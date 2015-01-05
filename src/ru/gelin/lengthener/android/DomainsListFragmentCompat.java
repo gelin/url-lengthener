@@ -53,6 +53,7 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
 
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            onStartActionMode();
             DomainsListFragmentCompat.this.actionMode = actionMode;
             MenuInflater inflater = actionMode.getMenuInflater();
             inflater.inflate(R.menu.domains_context, menu);
@@ -82,6 +83,7 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
             DomainsListFragmentCompat.this.actionMode = null;
             DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
             adapter.clearChecked();
+            onFinishActionMode();
         }
     }
 

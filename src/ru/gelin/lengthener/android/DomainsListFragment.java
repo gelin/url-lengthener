@@ -39,6 +39,7 @@ public class DomainsListFragment extends DomainsListFragmentBase {
 
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            onStartActionMode();
             MenuInflater inflater = actionMode.getMenuInflater();
             inflater.inflate(R.menu.domains_context, menu);
             return true;
@@ -62,7 +63,7 @@ public class DomainsListFragment extends DomainsListFragmentBase {
 
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
-            //nothing to do
+            onFinishActionMode();
         }
     }
 

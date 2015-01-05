@@ -6,11 +6,12 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +29,8 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
     String prefsPrefix = DEFAULT_PREFS_PREFIX;
 
     EditText newDomain;
+
+    ImageButton fab;
 
     public static DomainsListFragmentBase newInstance(String prefsPrefix) {
         DomainsListFragmentBase fragment;
@@ -53,29 +56,26 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
         if (this.prefsPrefix == null) {
             this.prefsPrefix = DEFAULT_PREFS_PREFIX;
         }
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root =  inflater.inflate(R.layout.domain_list_frgment, container, false);
+        this.fab = (ImageButton) root.findViewById(R.id.fab);
+        this.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addDomain();
+            }
+        });
+        return root;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setEmptyText(getString(R.string.no_domains));
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.domains_action, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                addDomain();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+//        setEmptyText(getString(R.string.no_domains));
     }
 
     void addDomain() {
@@ -118,6 +118,20 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
             toRemove.add((int) id);
         }
         adapter.deleteDomains(toRemove);
+    }
+
+    protected void onStartActionMode() {
+        if (this.fab == null) {
+            return;
+        }
+        this.fab.setVisibility(View.GONE);
+    }
+
+    protected void onFinishActionMode() {
+        if (this.fab == null) {
+            return;
+        }
+        this.fab.setVisibility(View.VISIBLE);
     }
 
 }
