@@ -24,4 +24,9 @@ public class AndroidLengthenerSettings implements LengthenerSettings {
         return adapter.getDomains();
     }
 
+    @Override
+    public Set<String> getRemoveParamPatterns() {
+        return null;    //TODO
+    }
+
 }

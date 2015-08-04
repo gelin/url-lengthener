@@ -14,4 +14,11 @@ enum TestLengthenerSettings implements LengthenerSettings {
         return result;
     }
 
+    @Override
+    public Set<String> getRemoveParamPatterns() {
+        Set<String> result = new HashSet<String>();
+        result.add("utm_*");
+        return result;
+    }
+
 }

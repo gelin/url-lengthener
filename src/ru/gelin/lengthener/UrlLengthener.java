@@ -63,19 +63,28 @@ public class UrlLengthener {
             String hostName = host.getHostName();
             for (String domain : this.settings.getRemoveQueryDomains()) {
                 if (hostName.equals(domain) || hostName.endsWith("." + domain)) {
-                    return removeQuery(uri);
+                    return removeQueryPart(uri);
                 }
             }
             return uri;
         }
 
-        URI removeQuery(URI uri) {
+        URI removeQueryPart(URI uri) {
             try {
                 return new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(),
                         uri.getPort(), uri.getPath(), null, uri.getFragment());
             } catch (URISyntaxException e) {
                 return uri;
             }
+        }
+
+        URI removeParams(URI uri) {
+            if (this.settings == null || this.settings.getRemoveParamPatterns() == null
+                    || this.settings.getRemoveParamPatterns().isEmpty()) {
+                return uri;
+            }
+            //TODO
+            return uri;
         }
 
         String toString(URI uri, HttpHost host) throws IOException {
