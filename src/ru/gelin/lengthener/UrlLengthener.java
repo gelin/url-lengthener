@@ -1,10 +1,12 @@
 package ru.gelin.lengthener;
 
 import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.ExecutionContext;
@@ -13,6 +15,8 @@ import org.apache.http.protocol.HttpContext;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  Lengthens one URL
@@ -52,6 +56,7 @@ public class UrlLengthener {
             HttpUriRequest finalRequest = (HttpUriRequest)context.getAttribute(ExecutionContext.HTTP_REQUEST);
             URI finalUri = finalRequest.getURI();
             finalUri = removeQuery(finalUri, target);
+            finalUri = removeParams(finalUri);
             return toString(finalUri, target);
         }
 
@@ -83,8 +88,42 @@ public class UrlLengthener {
                     || this.settings.getRemoveParamPatterns().isEmpty()) {
                 return uri;
             }
-            //TODO
-            return uri;
+            if (uri.getQuery() == null || uri.getQuery().length() == 0) {
+                return uri;
+            }
+
+            List<Glob> globs = new ArrayList<Glob>(this.settings.getRemoveParamPatterns().size());
+            for (String pattern : this.settings.getRemoveParamPatterns()) {
+                try {
+                    globs.add(new Glob(pattern));
+                } catch (Exception e) {
+                    //invalid pattern
+                }
+            }
+
+            List<NameValuePair> params = URLEncodedUtils.parse(uri, "UTF-8");
+            StringBuilder newQuery = new StringBuilder();
+            for (NameValuePair pair : params) {
+                for (Glob glob : globs) {
+                    if (!glob.matches(pair.getName())) {
+                        if (newQuery.length() > 0) {
+                            newQuery.append("&");
+                        }
+                        newQuery.append(pair.getName());
+                        newQuery.append("=");
+                        newQuery.append(pair.getValue());
+                    }
+                }
+            }
+
+            try {
+                return new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(),
+                        uri.getPort(), uri.getPath(),
+                        newQuery.toString(),
+                        uri.getFragment());
+            } catch (URISyntaxException e) {
+                return uri;
+            }
         }
 
         String toString(URI uri, HttpHost host) throws IOException {
