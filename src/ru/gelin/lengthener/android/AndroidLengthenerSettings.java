@@ -20,8 +20,8 @@ public class AndroidLengthenerSettings implements LengthenerSettings {
 
     @Override
     public Set<String> getRemoveQueryDomains() {
-        DomainsListAdapter adapter = new DomainsListAdapter(this.context, REMOVE_QUERY_DOMAINS_PREFIX);
-        return adapter.getDomains();
+        StringsListAdapter adapter = new StringsListAdapter(this.context, REMOVE_QUERY_DOMAINS_PREFIX);
+        return adapter.getStrings();
     }
 
     @Override

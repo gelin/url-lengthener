@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DomainsListAdapterTest extends AndroidTestCase {
 
-    DomainsListAdapter adapter;
+    StringsListAdapter adapter;
 
     public void setUp() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -18,7 +18,7 @@ public class DomainsListAdapterTest extends AndroidTestCase {
                 .putString("test_domains_0", "yandex.ru")
                 .putString("test_domains_1", "gelin.ru")
                 .commit();
-        this.adapter = new DomainsListAdapter(getContext(), "test_domains_");
+        this.adapter = new StringsListAdapter(getContext(), "test_domains_");
     }
 
     public void testGetCount() {
@@ -37,7 +37,7 @@ public class DomainsListAdapterTest extends AndroidTestCase {
 
     public void testGetView() {
         View view = this.adapter.getView(0, null, null);
-        TextView text = (TextView)view.findViewById(R.id.domain);
+        TextView text = (TextView)view.findViewById(R.id.string);
         assertEquals("gelin.ru", text.getText());
     }
 
@@ -46,9 +46,9 @@ public class DomainsListAdapterTest extends AndroidTestCase {
         ArrayList<Integer> toRemove = new ArrayList<Integer>();
         toRemove.add(0);
         toRemove.add(1);
-        this.adapter.deleteDomains(toRemove);
+        this.adapter.deleteStrings(toRemove);
         assertEquals(0, this.adapter.getCount());
-        this.adapter.addDomain("google.com");
+        this.adapter.addString("google.com");
         assertEquals(1, this.adapter.getCount());
     }
 

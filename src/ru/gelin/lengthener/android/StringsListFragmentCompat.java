@@ -15,34 +15,34 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- *  A Fragment which allows to add and remove domains (as strings) to/from the list.
+ *  A Fragment which allows to add and remove strings to/from the list.
  *  This version of the fragment works on devices with API < 11
  */
-public class DomainsListFragmentCompat extends DomainsListFragmentBase implements DialogInterface.OnClickListener {
+public class StringsListFragmentCompat extends StringsListFragmentBase implements DialogInterface.OnClickListener {
 
     ActionMode actionMode;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(new DomainsListAdapterCompat(getActivity(), this.prefsPrefix));
+        setListAdapter(new StringsListAdapterCompat(getActivity(), this.prefsPrefix));
 
         final ListView list = getListView();
-        final DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
+        final StringsListAdapterCompat adapter = (StringsListAdapterCompat)getListAdapter();
         list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 adapter.toggleChecked(position);
 //                list.setItemChecked(position, true);
-                if (DomainsListFragmentCompat.this.actionMode == null) {
+                if (StringsListFragmentCompat.this.actionMode == null) {
                     ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionModeCallback());
                 } else {
                     int checkedCount = adapter.getCheckedCount();
                     if (checkedCount == 0) {
-                        DomainsListFragmentCompat.this.actionMode.finish();
+                        StringsListFragmentCompat.this.actionMode.finish();
                     } else {
-                        DomainsListFragmentCompat.this.actionMode.setTitle(String.valueOf(checkedCount));
+                        StringsListFragmentCompat.this.actionMode.setTitle(String.valueOf(checkedCount));
                     }
                 }
             }
@@ -54,10 +54,10 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
         @Override
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             onStartActionMode();
-            DomainsListFragmentCompat.this.actionMode = actionMode;
+            StringsListFragmentCompat.this.actionMode = actionMode;
             MenuInflater inflater = actionMode.getMenuInflater();
-            inflater.inflate(R.menu.domains_context, menu);
-            DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
+            inflater.inflate(R.menu.string_list_context, menu);
+            StringsListAdapterCompat adapter = (StringsListAdapterCompat)getListAdapter();
             actionMode.setTitle(String.valueOf(adapter.getCheckedCount()));
             return true;
         }
@@ -71,7 +71,7 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_delete:
-                    deleteSelectedDomains();
+                    deleteSelectedStrings();
                     actionMode.finish();
                     return true;
             }
@@ -80,15 +80,15 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
 
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
-            DomainsListFragmentCompat.this.actionMode = null;
-            DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
+            StringsListFragmentCompat.this.actionMode = null;
+            StringsListAdapterCompat adapter = (StringsListAdapterCompat)getListAdapter();
             adapter.clearChecked();
             onFinishActionMode();
         }
     }
 
-    void deleteSelectedDomains() {
-        DomainsListAdapterCompat adapter = (DomainsListAdapterCompat)getListAdapter();
+    void deleteSelectedStrings() {
+        StringsListAdapterCompat adapter = (StringsListAdapterCompat)getListAdapter();
         if (adapter == null) {
             return;
         }
@@ -99,7 +99,7 @@ public class DomainsListFragmentCompat extends DomainsListFragmentBase implement
                     toRemove.add(i);
                 }
             }
-            adapter.deleteDomains(toRemove);
+            adapter.deleteStrings(toRemove);
         }
     }
 

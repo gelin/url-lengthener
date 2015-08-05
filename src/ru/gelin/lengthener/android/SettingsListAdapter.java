@@ -47,7 +47,8 @@ public class SettingsListAdapter extends BaseAdapter {
         new SettingsListItem(R.string.domains),
         new SettingsListItem(R.string.remove_query, R.string.remove_query_for_domains,
                 new Intent("ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"),
-                DomainsListFragment.newInstance(AndroidLengthenerSettings.REMOVE_QUERY_DOMAINS_PREFIX)),
+                StringsListFragment.newInstance(
+                        AndroidLengthenerSettings.REMOVE_QUERY_DOMAINS_PREFIX, R.string.add_domain)),
     };
 
     private final Context context;

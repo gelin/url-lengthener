@@ -1,35 +1,28 @@
 package ru.gelin.lengthener.android;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *  A ListAdapter which reads the list of domain names from SharedPreferences.
+ *  A ListAdapter which reads the list of strings from SharedPreferences.
  *  This version contains additional methods to handle checking of multiple items.
  */
-public class DomainsListAdapterCompat extends DomainsListAdapter {
+public class StringsListAdapterCompat extends StringsListAdapter {
 
     List<Boolean> checked;
 
-    public DomainsListAdapterCompat(Context context, String prefsPrefix) {
+    public StringsListAdapterCompat(Context context, String prefsPrefix) {
         super(context, prefsPrefix);
     }
 
     @Override
-    synchronized void readDomains() {
-        super.readDomains();
+    synchronized void readStrings() {
+        super.readStrings();
         this.checked = new ArrayList<Boolean>();
-        for (String domain : this.domains) {
+        for (String string : this.strings) {
             this.checked.add(false);
         }
     }

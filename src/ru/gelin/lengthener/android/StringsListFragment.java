@@ -9,15 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
- *  A Fragment which allows to add and remove domains (as strings) to/from the list.
+ *  A Fragment which allows to add and remove strings to/from the list.
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class DomainsListFragment extends DomainsListFragmentBase {
+public class StringsListFragment extends StringsListFragmentBase {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(new DomainsListAdapter(getActivity(), this.prefsPrefix));
+        setListAdapter(new StringsListAdapter(getActivity(), this.prefsPrefix));
 
         final ListView list = getListView();
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
@@ -41,7 +41,7 @@ public class DomainsListFragment extends DomainsListFragmentBase {
         public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
             onStartActionMode();
             MenuInflater inflater = actionMode.getMenuInflater();
-            inflater.inflate(R.menu.domains_context, menu);
+            inflater.inflate(R.menu.string_list_context, menu);
             return true;
         }
 
@@ -54,7 +54,7 @@ public class DomainsListFragment extends DomainsListFragmentBase {
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_delete:
-                    deleteSelectedDomains();
+                    deleteSelectedStrings();
                     actionMode.finish();
                     return true;
             }

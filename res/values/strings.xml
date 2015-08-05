@@ -21,12 +21,16 @@ appears again, choose the actual target now.
     <string name="add">Add</string>
     <string name="cannot_lengthen">Cannot lengthen urls</string>
     <string name="not_lengthened_urls">Share original URLs to</string>
-    <string name="delete_domains">Delete domains</string>
-    <string name="no_domains">No domains.\nChoose \"Add domain\" menu item to add one.</string>
 
     <string name="help_1_share">Share a text with links from your RSS reader or any other application.</string>
     <string name="help_2_choose_lengthener">Choose \"URL Lengthener\" from the list of share targets.</string>
     <string name="help_3_processing">The app searches URLs ain the shared text and replaces them with longer versions. The Internet connection is required.</string>
     <string name="help_4_share_again">The text with lengthened URLs is shared again. Now choose the actual target. For example, email application.</string>
     <string name="help_5_shared">Now the shared text contains long URLs.</string>
+
+    <!-- v.0.3 -->
+    <string name="delete">Delete</string>
+    <string name="no_items">No items.\nClick \"Add\" button.</string>
+    <string name="add_param_pattern">Add param pattern</string>
+
 </resources>

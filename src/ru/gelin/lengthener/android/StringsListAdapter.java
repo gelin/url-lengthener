@@ -2,9 +2,7 @@ package ru.gelin.lengthener.android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,30 +12,30 @@ import android.widget.TextView;
 import java.util.*;
 
 /**
- *  A ListAdapter which reads the list of domain names from SharedPreferences.
+ *  A ListAdapter which reads the list of strings from SharedPreferences.
  */
-public class DomainsListAdapter extends BaseAdapter {
+public class StringsListAdapter extends BaseAdapter {
 
     final String prefsPrefix;
     final Context context;
-    final List<String> domains = new ArrayList<String>();
+    final List<String> strings = new ArrayList<String>();
 
-    public DomainsListAdapter(Context context, String prefsPrefix) {
+    public StringsListAdapter(Context context, String prefsPrefix) {
         this.prefsPrefix = prefsPrefix;
         this.context = context;
-        readDomains();
+        readStrings();
     }
 
-    synchronized void readDomains() {
-        this.domains.clear();
+    synchronized void readStrings() {
+        this.strings.clear();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         int i = 0;
-        Set<String> domains = new TreeSet<String>();
+        Set<String> strings = new TreeSet<String>();
         while (prefs.contains(key(i))) {
-            domains.add(prefs.getString(key(i), ""));
+            strings.add(prefs.getString(key(i), ""));
             i++;
         }
-        this.domains.addAll(domains);
+        this.strings.addAll(strings);
     }
 
     String key(int index) {
@@ -51,12 +49,12 @@ public class DomainsListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return this.domains.size();
+        return this.strings.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.domains.get(position);
+        return this.strings.get(position);
     }
 
     @Override
@@ -75,50 +73,50 @@ public class DomainsListAdapter extends BaseAdapter {
     }
 
     View inflateView(ViewGroup parent) {
-        return LayoutInflater.from(this.context).inflate(R.layout.domain_list_item, parent, false);
+        return LayoutInflater.from(this.context).inflate(R.layout.string_list_item, parent, false);
     }
 
     void bindView(View view, int position) {
-        TextView text = (TextView) view.findViewById(R.id.domain);
-        text.setText(this.domains.get(position));
+        TextView text = (TextView) view.findViewById(R.id.string);
+        text.setText(this.strings.get(position));
     }
 
-    public synchronized void addDomain(String newDomain) {
+    public synchronized void addString(String newString) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key(getCount()), newDomain);
+        editor.putString(key(getCount()), newString);
         editor.commit();
-        readDomains();
+        readStrings();
         notifyDataSetChanged();
     }
 
-    public synchronized Set<String> getDomains() {
+    public synchronized Set<String> getStrings() {
         Set<String> result = new TreeSet<String>();
-        result.addAll(this.domains);
+        result.addAll(this.strings);
         return result;
     }
 
-    public synchronized void deleteDomains(Collection<Integer> positions) {
-        int origSize = this.domains.size();
+    public synchronized void deleteStrings(Collection<Integer> positions) {
+        int origSize = this.strings.size();
         List<String> toRemove = new ArrayList<String>();
         for (int position : positions) {
-            toRemove.add(this.domains.get(position));
+            toRemove.add(this.strings.get(position));
         }
-        for (String domain : toRemove) {
-            this.domains.remove(domain);
+        for (String string : toRemove) {
+            this.strings.remove(string);
         }
-        saveAllDomains(origSize);
-        readDomains();
+        saveAllStrings(origSize);
+        readStrings();
         notifyDataSetChanged();
     }
 
-    private synchronized void saveAllDomains(int origSize) {
+    private synchronized void saveAllStrings(int origSize) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         SharedPreferences.Editor editor = prefs.edit();
-        for (int i = 0; i < this.domains.size(); i++) {
-            editor.putString(key(i), this.domains.get(i));
+        for (int i = 0; i < this.strings.size(); i++) {
+            editor.putString(key(i), this.strings.get(i));
         }
-        for (int j = this.domains.size(); j < origSize; j++) {
+        for (int j = this.strings.size(); j < origSize; j++) {
             editor.remove(key(j));
         }
         editor.commit();

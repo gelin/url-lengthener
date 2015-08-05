@@ -17,31 +17,38 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- *  A base class for Fragment which allows to add and remove domains (as strings) to/from the list.
+ *  A base class for Fragment which allows to add and remove strings to/from the list.
  */
-abstract public class DomainsListFragmentBase extends ListFragment implements DialogInterface.OnClickListener {
+abstract public class StringsListFragmentBase extends ListFragment implements DialogInterface.OnClickListener {
 
     /** Preferences prefix parameter key */
     public static final String PREFS_PREFIX = "prefsPrefix";
+    /** Add dialog title parameter key */
+    public static final String ADD_DIALOG_TITLE = "addDialogTitle";
+
     /** Default preferences prefix */
-    public static final String DEFAULT_PREFS_PREFIX = "domains_";
+    public static final String DEFAULT_PREFS_PREFIX = "strings_";
+    /** Default add dialog title */
+    public static final int DEFAULT_ADD_DIALOG_TITLE = R.string.add;
 
     String prefsPrefix = DEFAULT_PREFS_PREFIX;
+    int addDialogTitle = DEFAULT_ADD_DIALOG_TITLE;
 
-    EditText newDomain;
+    EditText newString;
 
     ImageButton fab;
 
-    public static DomainsListFragmentBase newInstance(String prefsPrefix) {
-        DomainsListFragmentBase fragment;
+    public static StringsListFragmentBase newInstance(String prefsPrefix, int addDialogTitleRes) {
+        StringsListFragmentBase fragment;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            fragment = new DomainsListFragment();
+            fragment = new StringsListFragment();
         } else {
-            fragment = new DomainsListFragmentCompat();
+            fragment = new StringsListFragmentCompat();
         }
 
         Bundle args = new Bundle();
         args.putString(PREFS_PREFIX, prefsPrefix);
+        args.putInt(ADD_DIALOG_TITLE, addDialogTitleRes);
         fragment.setArguments(args);
 
         return fragment;
@@ -52,21 +59,25 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             this.prefsPrefix = getArguments().getString(PREFS_PREFIX);
+            this.addDialogTitle = getArguments().getInt(ADD_DIALOG_TITLE);
         }
         if (this.prefsPrefix == null) {
             this.prefsPrefix = DEFAULT_PREFS_PREFIX;
+        }
+        if (this.addDialogTitle == 0) {
+            this.addDialogTitle = DEFAULT_ADD_DIALOG_TITLE;
         }
 //        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root =  inflater.inflate(R.layout.domain_list_frgment, container, false);
+        View root =  inflater.inflate(R.layout.string_list_frgment, container, false);
         this.fab = (ImageButton) root.findViewById(R.id.fab);
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addDomain();
+                addString();
             }
         });
         return root;
@@ -78,11 +89,11 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
 //        setEmptyText(getString(R.string.no_domains));
     }
 
-    void addDomain() {
-        this.newDomain = new EditText(getActivity());
+    void addString() {
+        this.newString = new EditText(getActivity());
         Dialog dialog = new AlertDialog.Builder(getActivity())
-            .setTitle(R.string.add_domain)
-            .setView(this.newDomain)
+            .setTitle(this.addDialogTitle)
+            .setView(this.newString)
             .setPositiveButton(R.string.add, this)
             .setNegativeButton(android.R.string.cancel, null).create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -92,23 +103,23 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
         if (i == DialogInterface.BUTTON_POSITIVE) {
-            if (this.newDomain == null) {
+            if (this.newString == null) {
                 return;
             }
-            addDomain(this.newDomain.getText().toString());
+            addString(this.newString.getText().toString());
         }
     }
 
-    void addDomain(String newDomain) {
-        DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+    void addString(String newString) {
+        StringsListAdapter adapter = (StringsListAdapter)getListAdapter();
         if (adapter == null) {
             return;
         }
-        adapter.addDomain(newDomain);
+        adapter.addString(newString);
     }
 
-    void deleteSelectedDomains() {
-        DomainsListAdapter adapter = (DomainsListAdapter)getListAdapter();
+    void deleteSelectedStrings() {
+        StringsListAdapter adapter = (StringsListAdapter)getListAdapter();
         if (adapter == null) {
             return;
         }
@@ -117,7 +128,7 @@ abstract public class DomainsListFragmentBase extends ListFragment implements Di
         for (long id : checked) {
             toRemove.add((int) id);
         }
-        adapter.deleteDomains(toRemove);
+        adapter.deleteStrings(toRemove);
     }
 
     protected void onStartActionMode() {
