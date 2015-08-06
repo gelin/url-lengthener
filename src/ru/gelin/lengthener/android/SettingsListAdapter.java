@@ -41,14 +41,19 @@ public class SettingsListAdapter extends BaseAdapter {
     }
 
     private static SettingsListItem[] ITEMS = {
-        new SettingsListItem(R.string.how_to_use, R.string.app_description,
-                new Intent("ru.gelin.lengthener.android.ACTION_HELP"),
-                HelpFragment.newInstance()),
-        new SettingsListItem(R.string.domains),
-        new SettingsListItem(R.string.remove_query, R.string.remove_query_for_domains,
-                new Intent("ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"),
-                StringsListFragment.newInstance(
-                        AndroidLengthenerSettings.REMOVE_QUERY_DOMAINS_PREFIX, R.string.add_domain)),
+            new SettingsListItem(R.string.how_to_use, R.string.app_description,
+                    new Intent("ru.gelin.lengthener.android.ACTION_HELP"),
+                    HelpFragment.newInstance()),
+            new SettingsListItem(R.string.settings),
+            new SettingsListItem(R.string.remove_params, R.string.remove_params_patterns,
+                    new Intent("ru.gelin.lengthener.android.ACTION_SET_REMOVE_PARAMS_PATTERNS"),
+                    StringsListFragment.newInstance(
+                            AndroidLengthenerSettings.REMOVE_PARAMS_PATTERNS_PREFIX, R.string.add_param_pattern)),
+            new SettingsListItem(R.string.remove_query, R.string.remove_query_for_domains,
+                    new Intent("ru.gelin.lengthener.android.ACTION_SET_REMOVE_QUERY_DOMAINS"),
+                    StringsListFragment.newInstance(
+                            AndroidLengthenerSettings.REMOVE_QUERY_DOMAINS_PREFIX, R.string.add_domain)),
+
     };
 
     private final Context context;

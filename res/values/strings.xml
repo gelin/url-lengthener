@@ -10,7 +10,6 @@ appears again, choose the actual target now.
 \nNote the app requires Internet access, otherwise URLs stay unmodified.</string>
     <string name="lengthened_urls">Share lenghthened URLs to</string>
     <string name="lengthening">Lengthening...</string>
-    <string name="domains">Domains</string>
     <string name="remove_query">Remove query</string>
     <string name="remove_query_domains">Remove query domains</string>
     <string name="remove_query_for_domains">Remove query part of URLs for specified domains</string>
@@ -24,7 +23,7 @@ appears again, choose the actual target now.
 
     <string name="help_1_share">Share a text with links from your RSS reader or any other application.</string>
     <string name="help_2_choose_lengthener">Choose \"URL Lengthener\" from the list of share targets.</string>
-    <string name="help_3_processing">The app searches URLs ain the shared text and replaces them with longer versions. The Internet connection is required.</string>
+    <string name="help_3_processing">The app searches URLs in the shared text and replaces them with longer versions. The Internet connection is required.</string>
     <string name="help_4_share_again">The text with lengthened URLs is shared again. Now choose the actual target. For example, email application.</string>
     <string name="help_5_shared">Now the shared text contains long URLs.</string>
 
@@ -32,5 +31,8 @@ appears again, choose the actual target now.
     <string name="delete">Delete</string>
     <string name="no_items">No items.\nClick \"Add\" button.</string>
     <string name="add_param_pattern">Add param pattern</string>
+    <string name="settings">Settings</string>
+    <string name="remove_params">Remove parameters</string>
+    <string name="remove_params_patterns">Define patterns (with \'*\' or \'?\' characters) for parameter names to be removed from URL query</string>
 
 </resources>

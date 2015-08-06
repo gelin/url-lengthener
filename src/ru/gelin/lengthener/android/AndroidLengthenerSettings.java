@@ -10,7 +10,8 @@ import java.util.Set;
  */
 public class AndroidLengthenerSettings implements LengthenerSettings {
 
-    public static String REMOVE_QUERY_DOMAINS_PREFIX = "remove_query_domains_";
+    public static final String REMOVE_QUERY_DOMAINS_PREFIX = "remove_query_domains_";
+    public static final String REMOVE_PARAMS_PATTERNS_PREFIX = "remove_params_patterns_";
 
     private final Context context;
 
@@ -26,7 +27,8 @@ public class AndroidLengthenerSettings implements LengthenerSettings {
 
     @Override
     public Set<String> getRemoveParamPatterns() {
-        return null;    //TODO
+        StringsListAdapter adapter = new StringsListAdapter(this.context, REMOVE_PARAMS_PATTERNS_PREFIX);
+        return adapter.getStrings();
     }
 
 }

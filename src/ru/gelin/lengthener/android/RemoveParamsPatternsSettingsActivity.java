@@ -7,9 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 /**
- *  Activity to setup domains where to remove query.
+ *  Activity to setup params pattenrs which to remove from the query.
  */
-public class RemoveQueryDomainsSettingsActivity extends ActionBarActivity {
+public class RemoveParamsPatternsSettingsActivity extends ActionBarActivity {
 
     StringsListFragmentBase fragment;
 
@@ -25,7 +25,7 @@ public class RemoveQueryDomainsSettingsActivity extends ActionBarActivity {
     Fragment getFragment() {
         if (this.fragment == null) {
             this.fragment = StringsListFragmentBase.newInstance(
-                    AndroidLengthenerSettings.REMOVE_QUERY_DOMAINS_PREFIX, R.string.add_domain);
+                    AndroidLengthenerSettings.REMOVE_PARAMS_PATTERNS_PREFIX, R.string.add_param_pattern);
         }
         return this.fragment;
     }
