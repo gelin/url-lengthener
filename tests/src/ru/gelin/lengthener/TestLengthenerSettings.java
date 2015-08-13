@@ -18,6 +18,7 @@ enum TestLengthenerSettings implements LengthenerSettings {
     public Set<String> getRemoveParamPatterns() {
         Set<String> result = new HashSet<String>();
         result.add("utm_*");
+        result.add("*ABC");
         return result;
     }
 

@@ -103,17 +103,19 @@ public class UrlLengthener {
 
             List<NameValuePair> params = URLEncodedUtils.parse(uri, "UTF-8");
             StringBuilder newQuery = new StringBuilder();
+            params:
             for (NameValuePair pair : params) {
                 for (Glob glob : globs) {
-                    if (!glob.matches(pair.getName())) {
-                        if (newQuery.length() > 0) {
-                            newQuery.append("&");
-                        }
-                        newQuery.append(pair.getName());
-                        newQuery.append("=");
-                        newQuery.append(pair.getValue());
+                    if (glob.matches(pair.getName())) {
+                        continue params;
                     }
                 }
+                if (newQuery.length() > 0) {
+                    newQuery.append("&");
+                }
+                newQuery.append(pair.getName());
+                newQuery.append("=");
+                newQuery.append(pair.getValue());
             }
 
             try {

@@ -46,4 +46,11 @@ public class UrlLengthenerTest extends AndroidTestCase {
                         TestLengthenerSettings.INSTANCE));
     }
 
+    public void testRemoveMultiplePatterns() throws IOException {
+        assertEquals("http://example.com/?abc=def&ghi=nbv",
+                UrlLengthener.lengthenUrl(
+                        "http://example.com/?abc=def&utm_source=qwerty&testABC=test&ghi=nbv",
+                        TestLengthenerSettings.INSTANCE));
+    }
+
 }
