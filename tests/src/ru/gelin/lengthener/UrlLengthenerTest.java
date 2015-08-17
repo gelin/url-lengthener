@@ -53,4 +53,11 @@ public class UrlLengthenerTest extends AndroidTestCase {
                         TestLengthenerSettings.INSTANCE));
     }
 
+    public void testTailingQuestionMark() throws IOException {
+        assertEquals("http://example.com/",
+                UrlLengthener.lengthenUrl(
+                        "http://example.com/?utm_source=qwerty&testABC=test",
+                        TestLengthenerSettings.INSTANCE));
+    }
+
 }

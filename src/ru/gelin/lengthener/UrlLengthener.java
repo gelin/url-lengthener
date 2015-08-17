@@ -121,7 +121,7 @@ public class UrlLengthener {
             try {
                 return new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(),
                         uri.getPort(), uri.getPath(),
-                        newQuery.toString(),
+                        newQuery.length() > 0 ? newQuery.toString() : null,
                         uri.getFragment());
             } catch (URISyntaxException e) {
                 return uri;
