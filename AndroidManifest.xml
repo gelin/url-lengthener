@@ -6,7 +6,8 @@
 
     <application android:icon="@drawable/icon"
                  android:label="@string/app_name"
-                 android:theme="@style/Theme.Application">
+                 android:theme="@style/Theme.Application"
+                 android:name=".LengthenerApplication">
 
         <activity android:name=".ShareActivity"
                   android:theme="@style/Theme.Dialog">
