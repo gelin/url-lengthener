@@ -1,6 +1,7 @@
 package ru.gelin.lengthener;
 
 import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -51,10 +52,11 @@ public class UrlLengthener {
             HttpGet request = new HttpGet(url);
             request.setHeader("User-Agent", USER_AGENT);
             HttpContext context = new BasicHttpContext();
-            client.execute(request, context);
+            HttpResponse response = client.execute(request, context);
             HttpHost target = (HttpHost)context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
             HttpUriRequest finalRequest = (HttpUriRequest)context.getAttribute(ExecutionContext.HTTP_REQUEST);
             URI finalUri = finalRequest.getURI();
+            response.getEntity().consumeContent();  // http://stackoverflow.com/questions/4775618/httpclient-4-0-1-how-to-release-connection
             finalUri = removeQuery(finalUri, target);
             finalUri = removeParams(finalUri);
             return toString(finalUri, target);
