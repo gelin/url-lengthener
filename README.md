@@ -19,12 +19,13 @@ Download
 Screenshots
 -----------
 
-![Share to...](https://bitbucket.org/gelin/url-lengthener-for-android/raw/85a80af4355d2f0a3d9d55c5d42536ca7e52f57b/misc/screenshots/device-2014-01-07-155125.png)
+![Share page...](misc/screenshots/share_page.png)
+![Share via...](misc/screenshots/share_via.png)
+![Lengthening...](misc/screenshots/lengthening.png)
+![Share to...](misc/screenshots/share_to.png)
 
-![Lengthening...](https://bitbucket.org/gelin/url-lengthener-for-android/raw/85a80af4355d2f0a3d9d55c5d42536ca7e52f57b/misc/screenshots/device-2014-01-07-155149.png)
-
-![Share again](https://bitbucket.org/gelin/url-lengthener-for-android/raw/85a80af4355d2f0a3d9d55c5d42536ca7e52f57b/misc/screenshots/device-2014-01-07-155214.png)
-
-![Main screen](https://bitbucket.org/gelin/url-lengthener-for-android/raw/85a80af4355d2f0a3d9d55c5d42536ca7e52f57b/misc/screenshots/main_activity.png)
-
-![Remove query domains screen](https://bitbucket.org/gelin/url-lengthener-for-android/raw/85a80af4355d2f0a3d9d55c5d42536ca7e52f57b/misc/screenshots/remove_query_domains_activity.png)
+![Main screen](misc/screenshots/main_activity.png)
+![Remove parameters screen](misc/screenshots/remove_parameters_activity.png)
+![Remove query domains screen](misc/screenshots/remove_query_domains_activity.png)
+![How to use screen](misc/screenshots/how_to_use_activity_1.png)
+![How to use screen](misc/screenshots/how_to_use_activity_2.png)
