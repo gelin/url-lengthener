@@ -18,4 +18,10 @@ public interface LengthenerSettings {
      */
     Set<String> getRemoveParamPatterns();
 
+    /**
+     *  Returns true if network is available to resolve redirects.
+     *  Returns false if network is not available, so operations which require it should be skipped.
+     */
+    boolean isNetworkAvailable();
+
 }

@@ -5,7 +5,14 @@ import java.util.Set;
 
 enum TestLengthenerSettings implements LengthenerSettings {
 
-    INSTANCE;
+    INSTANCE(true),
+    INSTANCE_NO_NETWORK(false);
+
+    private final boolean networkAvailable;
+
+    TestLengthenerSettings(boolean networkAvailable) {
+        this.networkAvailable = networkAvailable;
+    }
 
     @Override
     public Set<String> getRemoveQueryDomains() {
@@ -20,6 +27,11 @@ enum TestLengthenerSettings implements LengthenerSettings {
         result.add("utm_*");
         result.add("*ABC");
         return result;
+    }
+
+    @Override
+    public boolean isNetworkAvailable() {
+        return this.networkAvailable;
     }
 
 }

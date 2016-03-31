@@ -60,4 +60,22 @@ public class UrlLengthenerTest extends AndroidTestCase {
                         TestLengthenerSettings.INSTANCE));
     }
 
+    public void testGooGlNoNetwork() throws IOException {
+        assertEquals("http://goo.gl/Krvqj", UrlLengthener.lengthenUrl("http://goo.gl/Krvqj", TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
+    public void testRemoveQueryNoNetwork() throws IOException {
+        assertEquals("http://www.linux.org.ru/news/openoffice/9393827",
+                UrlLengthener.lengthenUrl(
+                        "http://www.linux.org.ru/news/openoffice/9393827?abc=def&utm_source=qwerty&ghi=nbv",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
+    public void testRemoveParamsNoNetwork() throws IOException {
+        assertEquals("http://example.com/?abc=def&ghi=nbv",
+                UrlLengthener.lengthenUrl(
+                        "http://example.com/?abc=def&utm_source=qwerty&ghi=nbv",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
 }

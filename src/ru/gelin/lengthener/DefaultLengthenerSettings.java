@@ -26,4 +26,9 @@ enum DefaultLengthenerSettings implements LengthenerSettings {
         return Collections.unmodifiableSet(DEFAULT_REMOVE_PARAM_PATTERNS);
     }
 
+    @Override
+    public boolean isNetworkAvailable() {
+        return true;
+    }
+
 }
