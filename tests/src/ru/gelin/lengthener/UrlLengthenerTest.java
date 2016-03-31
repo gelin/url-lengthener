@@ -7,11 +7,11 @@ import java.io.IOException;
 public class UrlLengthenerTest extends AndroidTestCase {
 
     public void testGooGl() throws IOException {
-        assertEquals("http://ya.ru/", UrlLengthener.lengthenUrl("http://goo.gl/Krvqj"));
+        assertEquals("https://ya.ru/", UrlLengthener.lengthenUrl("http://goo.gl/Krvqj"));
     }
 
     public void testBitLy() throws IOException {
-        assertEquals("http://ya.ru/", UrlLengthener.lengthenUrl("http://bit.ly/WQuM"));
+        assertEquals("https://ya.ru/", UrlLengthener.lengthenUrl("http://bit.ly/WQuM"));
     }
 
     public void testFeedProxy() throws IOException {

@@ -1,21 +1,11 @@
 package ru.gelin.lengthener;
 
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.ExecutionContext;
-import org.apache.http.protocol.HttpContext;
-
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +15,6 @@ import java.util.List;
 public class UrlLengthener {
 
     static final String USER_AGENT = "URL Lengthener";
-
-    static private HttpClient client = new DefaultHttpClient();
 
     public static String lengthenUrl(String url) throws IOException {
         return lengthenUrl(url, DefaultLengthenerSettings.INSTANCE);
@@ -49,27 +37,32 @@ public class UrlLengthener {
         }
 
         public String lengthenUrl(String url) throws IOException {
-            HttpGet request = new HttpGet(url);
-            request.setHeader("User-Agent", USER_AGENT);
-            HttpContext context = new BasicHttpContext();
-            HttpResponse response = client.execute(request, context);
-            HttpHost target = (HttpHost)context.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
-            HttpUriRequest finalRequest = (HttpUriRequest)context.getAttribute(ExecutionContext.HTTP_REQUEST);
-            URI finalUri = finalRequest.getURI();
-            response.getEntity().consumeContent();  // http://stackoverflow.com/questions/4775618/httpclient-4-0-1-how-to-release-connection
-            finalUri = removeQuery(finalUri, target);
-            finalUri = removeParams(finalUri);
-            return toString(finalUri, target);
+            URI uri = URI.create(url);
+            HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+            try {
+                connection.addRequestProperty("User-Agent", USER_AGENT);
+                connection.setInstanceFollowRedirects(true);
+                InputStream input = connection.getInputStream();    //just to initiate the redirects
+                input.close();
+                uri = connection.getURL().toURI();
+            } catch (Exception e) {
+                //if we failed to connect, keep next processing
+            } finally {
+                connection.disconnect();
+            }
+            uri = removeQuery(uri);
+            uri = removeParams(uri);
+            return uri.toString();
         }
 
-        URI removeQuery(URI uri, HttpHost host) {
+        URI removeQuery(URI uri) {
+            String host = uri.getHost();
             if (this.settings == null || this.settings.getRemoveQueryDomains() == null
                     || this.settings.getRemoveQueryDomains().isEmpty()) {
                 return uri;
             }
-            String hostName = host.getHostName();
             for (String domain : this.settings.getRemoveQueryDomains()) {
-                if (hostName.equals(domain) || hostName.endsWith("." + domain)) {
+                if (host.equals(domain) || host.endsWith("." + domain)) {
                     return removeQueryPart(uri);
                 }
             }
@@ -85,7 +78,7 @@ public class UrlLengthener {
             }
         }
 
-        URI removeParams(URI uri) {
+        URI removeParams(URI uri) throws IOException {
             if (this.settings == null || this.settings.getRemoveParamPatterns() == null
                     || this.settings.getRemoveParamPatterns().isEmpty()) {
                 return uri;
@@ -103,21 +96,28 @@ public class UrlLengthener {
                 }
             }
 
-            List<NameValuePair> params = URLEncodedUtils.parse(uri, "UTF-8");
+            String[] pairs = uri.getQuery().split("&");
             StringBuilder newQuery = new StringBuilder();
-            params:
-            for (NameValuePair pair : params) {
+            pairs:
+            for (String pair : pairs) {
+                int equalSignIndex = pair.indexOf("=");
+                String name = equalSignIndex > 0 ?
+                        URLDecoder.decode(pair.substring(0, equalSignIndex), "utf-8") :
+                        pair;
                 for (Glob glob : globs) {
-                    if (glob.matches(pair.getName())) {
-                        continue params;
+                    if (glob.matches(name)) {
+                        continue pairs;
                     }
                 }
                 if (newQuery.length() > 0) {
                     newQuery.append("&");
                 }
-                newQuery.append(pair.getName());
-                newQuery.append("=");
-                newQuery.append(pair.getValue());
+                newQuery.append(name);
+                if (equalSignIndex > 0 && pair.length() > equalSignIndex + 1) {
+                    String value = URLDecoder.decode(pair.substring(equalSignIndex + 1), "utf-8");
+                    newQuery.append("=");
+                    newQuery.append(value);
+                }
             }
 
             try {
@@ -127,14 +127,6 @@ public class UrlLengthener {
                         uri.getFragment());
             } catch (URISyntaxException e) {
                 return uri;
-            }
-        }
-
-        String toString(URI uri, HttpHost host) throws IOException {
-            try {
-                return String.valueOf(URIUtils.rewriteURI(uri, host));
-            } catch (URISyntaxException e) {
-                throw new IOException("got invalid URI: " + uri);
             }
         }
 
