@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class UrlLengthener {
 
-    static final String USER_AGENT = "URL Lengthener";
-
     public static String lengthenUrl(String url) throws IOException {
         return lengthenUrl(url, DefaultLengthenerSettings.INSTANCE);
     }

@@ -15,13 +15,10 @@ public class TextUrlLengthenerTest extends AndroidTestCase {
     }
 
     public void testFeedProxy() {
-        assertEquals("Computerra: http://www.computerra.ru/73419/paradoks-kontsentratsii-pochemu-deyatelnost-v-sfere-informatsionnyih-tehnologiy-styagivaetsya-k-stolitsam-nesmotrya-na-ih-dorogoviznu/",
-                TextUrlLengthener.lengthenUrls("Computerra: http://feedproxy.google.com/~r/ct_news/~3/JCG5eeyTxZo/story01.htm"));
-    }
-
-    public void testFeedsPortal() {
-        assertEquals("Computerra: http://www.computerra.ru/73618/choose-a-camera-for-summer-holidays/",
-                TextUrlLengthener.lengthenUrls("Computerra: http://rss.feedsportal.com/c/32137/f/413387/s/2e4731a3/l/0L0Scomputerra0Bru0C736180Cchoose0Ea0Ecamera0Efor0Esummer0Eholidays0C/story01.htm"));
+        long start = System.currentTimeMillis();
+        TextUrlLengthener.lengthenUrls("Computerra: http://feedproxy.google.com/~r/ct_news/~3/JCG5eeyTxZo/story01.htm");
+        long end = System.currentTimeMillis();
+        assertTrue("Too long execution", (end - start) < (RedirectProcessor.CONNECT_TIMEOUT * 2.5));
     }
 
     public void testMultipleUrls() {

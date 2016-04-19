@@ -12,6 +12,8 @@ import java.net.URI;
 public class RedirectProcessor implements UriProcessor {
 
     static final String USER_AGENT = "URL Lengthener";
+    static final int CONNECT_TIMEOUT = 5000;    // 5 secs
+    static final int READ_TIMEOUT = 10000;      // 10 secs
 
     private final LengthenerSettings settings;
 
@@ -32,6 +34,8 @@ public class RedirectProcessor implements UriProcessor {
         try {
             connection.addRequestProperty("User-Agent", USER_AGENT);
             connection.setInstanceFollowRedirects(true);
+            connection.setConnectTimeout(CONNECT_TIMEOUT);
+            connection.setReadTimeout(READ_TIMEOUT);
             InputStream input = connection.getInputStream();    //just to initiate the redirects
             input.close();
             uri = connection.getURL().toURI();
