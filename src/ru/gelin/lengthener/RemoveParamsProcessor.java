@@ -2,7 +2,6 @@ package ru.gelin.lengthener;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,27 +41,21 @@ public class RemoveParamsProcessor implements UriProcessor {
             }
         }
 
-        String[] pairs = uri.getQuery().split("&");
         StringBuilder newQuery = new StringBuilder();
-        pairs:
-        for (String pair : pairs) {
-            int equalSignIndex = pair.indexOf("=");
-            String name = equalSignIndex > 0 ?
-                    URLDecoder.decode(pair.substring(0, equalSignIndex), "utf-8") :
-                    pair;
+        params:
+        for (QueryParameters.Parameter parameter : new QueryParameters(uri)) {
             for (Glob glob : globs) {
-                if (glob.matches(name)) {
-                    continue pairs;
+                if (glob.matches(parameter.getName())) {
+                    continue params;
                 }
             }
             if (newQuery.length() > 0) {
                 newQuery.append("&");
             }
-            newQuery.append(name);
-            if (equalSignIndex > 0 && pair.length() > equalSignIndex + 1) {
-                String value = URLDecoder.decode(pair.substring(equalSignIndex + 1), "utf-8");
+            newQuery.append(parameter.getName());
+            if (parameter.getValue() != null) {
                 newQuery.append("=");
-                newQuery.append(value);
+                newQuery.append(parameter.getValue());
             }
         }
 

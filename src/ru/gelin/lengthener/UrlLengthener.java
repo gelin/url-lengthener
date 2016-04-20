@@ -1,6 +1,5 @@
 package ru.gelin.lengthener;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
  */
 public class UrlLengthener {
 
-    public static String lengthenUrl(String url) throws IOException {
+    public static String lengthenUrl(String url) {
         return lengthenUrl(url, DefaultLengthenerSettings.INSTANCE);
     }
 
-    public static String lengthenUrl(String url, LengthenerSettings settings) throws IOException {
+    public static String lengthenUrl(String url, LengthenerSettings settings) {
         return new Lengthener(settings).lengthenUrl(url);
     }
 

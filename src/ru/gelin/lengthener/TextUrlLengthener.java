@@ -1,6 +1,5 @@
 package ru.gelin.lengthener;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,11 +20,7 @@ public class TextUrlLengthener {
         StringBuffer result = new StringBuffer();
         while (m.find()) {
             String url = m.group();
-            try {
-                url = UrlLengthener.lengthenUrl(url, settings);
-            } catch (IOException e) {
-                //ignoring possible errors
-            }
+            url = UrlLengthener.lengthenUrl(url, settings);
             m.appendReplacement(result, url);
         }
         m.appendTail(result);
