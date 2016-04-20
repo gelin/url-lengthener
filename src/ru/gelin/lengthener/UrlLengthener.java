@@ -23,9 +23,10 @@ public class UrlLengthener {
 
     private static class Lengthener {
 
-        List<UriProcessor> processors = new ArrayList<UriProcessor>(3);
+        List<UriProcessor> processors = new ArrayList<UriProcessor>(4);
 
         Lengthener(LengthenerSettings settings) {
+            processors.add(new VkAwayProcessor());
             processors.add(new RedirectProcessor(settings));
             processors.add(new RemoveQueryProcessor(settings));
             processors.add(new RemoveParamsProcessor(settings));

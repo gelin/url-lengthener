@@ -15,10 +15,14 @@ public class VkAwayProcessor implements UriProcessor {
         if (!"vk.com".equalsIgnoreCase(uri.getHost())) {
             return uri;
         }
-        if (!"away.php".equals(uri.getPath())) {
+        if (!"/away.php".equals(uri.getPath())) {
             return uri;
         }
-//        uri.getQuery();
+        for (QueryParameters.Parameter parameter : new QueryParameters(uri)) {
+            if ("to".equals(parameter.getName())) {
+                return URI.create(parameter.getValue());
+            }
+        }
         return uri;
     }
 
