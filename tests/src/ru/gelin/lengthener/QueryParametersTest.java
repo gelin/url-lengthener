@@ -6,7 +6,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryParameterTest  extends AndroidTestCase {
+public class QueryParametersTest extends AndroidTestCase {
 
     public void testParseParameters() {
         URI uri = URI.create("https://example.com/?abc=def&abc=asd&zxc=poi");

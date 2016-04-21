@@ -12,7 +12,7 @@ public class VkAwayProcessor implements UriProcessor {
 
     @Override
     public URI process(URI uri) throws Exception {
-        if (!"vk.com".equalsIgnoreCase(uri.getHost())) {
+        if (!"vk.com".equalsIgnoreCase(uri.getHost()) && !uri.getHost().endsWith(".vk.com")) {
             return uri;
         }
         if (!"/away.php".equals(uri.getPath())) {

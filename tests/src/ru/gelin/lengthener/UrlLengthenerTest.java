@@ -81,4 +81,10 @@ public class UrlLengthenerTest extends AndroidTestCase {
                         TestLengthenerSettings.INSTANCE_NO_NETWORK));
     }
 
+    public void testMVKNoNetwork() {
+        assertEquals("http://apriorilingva55.ru/",
+                UrlLengthener.lengthenUrl("https://m.vk.com/away.php?to=http%3A%2F%2Fapriorilingva55.ru%2F%3Futm_source%3Dvk%26utm_medium%3Dsocial%26utm_campaign%3Dreferal&post=-31121583_4369",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
 }
