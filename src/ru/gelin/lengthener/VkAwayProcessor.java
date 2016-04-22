@@ -12,10 +12,13 @@ public class VkAwayProcessor implements UriProcessor {
 
     @Override
     public URI process(URI uri) throws Exception {
-        if (!"vk.com".equalsIgnoreCase(uri.getHost()) && !uri.getHost().endsWith(".vk.com")) {
+        if (uri.getHost() == null || uri.getPath() == null) {
             return uri;
         }
-        if (!"/away.php".equals(uri.getPath())) {
+        if (!uri.getHost().equalsIgnoreCase("vk.com") && !uri.getHost().toLowerCase().endsWith(".vk.com")) {
+            return uri;
+        }
+        if (!uri.getPath().startsWith("/away")) {
             return uri;
         }
         for (QueryParameters.Parameter parameter : new QueryParameters(uri)) {
