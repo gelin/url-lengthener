@@ -3,6 +3,7 @@ package ru.gelin.lengthener;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *  Lengthens one URL
@@ -23,10 +24,17 @@ public class UrlLengthener {
 
     private static class Lengthener {
 
-        List<UriProcessor> processors = new ArrayList<UriProcessor>(4);
+        List<UriProcessor> processors = new ArrayList<UriProcessor>(5);
 
         Lengthener(LengthenerSettings settings) {
-            processors.add(new VkAwayProcessor());
+            processors.add(new UriFromParamProcessor(
+                    Pattern.compile("vk\\.com|.*\\.vk\\.com", Pattern.CASE_INSENSITIVE),
+                    Pattern.compile("/away.*"),
+                    "to"));
+            processors.add(new UriFromParamProcessor(
+                    Pattern.compile("url\\.google\\.com|.*\\.url\\.google\\.com", Pattern.CASE_INSENSITIVE),
+                    Pattern.compile("/url.*"),
+                    "q"));
             processors.add(new RedirectProcessor(settings));
             processors.add(new RemoveQueryProcessor(settings));
             processors.add(new RemoveParamsProcessor(settings));

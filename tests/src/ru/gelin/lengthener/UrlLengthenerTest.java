@@ -93,4 +93,10 @@ public class UrlLengthenerTest extends AndroidTestCase {
                         TestLengthenerSettings.INSTANCE_NO_NETWORK));
     }
 
+    public void testGPlusNoNetwork() {
+        assertEquals("http://appsconf.ru",
+            UrlLengthener.lengthenUrl("http://plus.url.google.com/url?q=http://appsconf.ru&rct=j&ust=1461772113919000&usg=AFQjCNGr60h5A0GeUuoh5OhP25GskDjwAQ",
+                    TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
 }
