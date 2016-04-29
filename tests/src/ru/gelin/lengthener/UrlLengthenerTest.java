@@ -7,11 +7,11 @@ import java.io.IOException;
 public class UrlLengthenerTest extends AndroidTestCase {
 
     public void testGooGl() throws IOException {
-        assertEquals("https://ya.ru/", UrlLengthener.lengthenUrl("http://goo.gl/Krvqj"));
+        assertEquals("http://ya.ru/", UrlLengthener.lengthenUrl("http://goo.gl/Krvqj"));
     }
 
     public void testBitLy() throws IOException {
-        assertEquals("https://ya.ru/", UrlLengthener.lengthenUrl("http://bit.ly/WQuM"));
+        assertEquals("http://ya.ru/", UrlLengthener.lengthenUrl("http://bit.ly/WQuM"));
     }
 
     public void testFeedProxy() throws IOException {
@@ -97,6 +97,18 @@ public class UrlLengthenerTest extends AndroidTestCase {
         assertEquals("http://appsconf.ru",
             UrlLengthener.lengthenUrl("http://plus.url.google.com/url?q=http://appsconf.ru&rct=j&ust=1461772113919000&usg=AFQjCNGr60h5A0GeUuoh5OhP25GskDjwAQ",
                     TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
+    public void testGPlus2NoNetwork() {
+        assertEquals("http://www.yaplakal.com/forum1/topic1367710.html",
+                UrlLengthener.lengthenUrl("http://plus.url.google.com/url?q=http://www.yaplakal.com/forum1/topic1367710.html&rct=j&ust=1461940843242000&usg=AFQjCNFGw0r7wCS0nSRYmNzyWolCfebo1Q",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
+    public void testGPlus2() {
+        assertEquals("http://www.yaplakal.com/forum1/topic1367710.html",
+                UrlLengthener.lengthenUrl("http://plus.url.google.com/url?q=http://www.yaplakal.com/forum1/topic1367710.html&rct=j&ust=1461940843242000&usg=AFQjCNFGw0r7wCS0nSRYmNzyWolCfebo1Q",
+                        TestLengthenerSettings.INSTANCE));
     }
 
 }

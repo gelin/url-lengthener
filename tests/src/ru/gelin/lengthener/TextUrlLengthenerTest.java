@@ -7,11 +7,11 @@ import java.io.IOException;
 public class TextUrlLengthenerTest extends AndroidTestCase {
 
     public void testGooGl() {
-        assertEquals("Yandex: https://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj"));
+        assertEquals("Yandex: http://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj"));
     }
 
     public void testBitLy() {
-        assertEquals("Yandex: https://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://bit.ly/WQuM"));
+        assertEquals("Yandex: http://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://bit.ly/WQuM"));
     }
 
     public void testFeedProxy() {
@@ -22,7 +22,7 @@ public class TextUrlLengthenerTest extends AndroidTestCase {
     }
 
     public void testMultipleUrls() {
-        assertEquals("Yandex: https://ya.ru/\nAnother Yandex: https://ya.ru/",
+        assertEquals("Yandex: http://ya.ru/\nAnother Yandex: http://ya.ru/",
                 TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj\nAnother Yandex: http://bit.ly/WQuM"));
     }
 
