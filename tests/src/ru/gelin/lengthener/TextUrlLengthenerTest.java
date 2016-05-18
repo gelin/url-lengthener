@@ -7,11 +7,11 @@ import java.io.IOException;
 public class TextUrlLengthenerTest extends AndroidTestCase {
 
     public void testGooGl() {
-        assertEquals("Yandex: http://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj"));
+        assertEquals("Yandex: https://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj"));
     }
 
     public void testBitLy() {
-        assertEquals("Yandex: http://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://bit.ly/WQuM"));
+        assertEquals("Yandex: https://ya.ru/", TextUrlLengthener.lengthenUrls("Yandex: http://bit.ly/WQuM"));
     }
 
     public void testFeedProxy() {
@@ -22,7 +22,7 @@ public class TextUrlLengthenerTest extends AndroidTestCase {
     }
 
     public void testMultipleUrls() {
-        assertEquals("Yandex: http://ya.ru/\nAnother Yandex: http://ya.ru/",
+        assertEquals("Yandex: https://ya.ru/\nAnother Yandex: https://ya.ru/",
                 TextUrlLengthener.lengthenUrls("Yandex: http://goo.gl/Krvqj\nAnother Yandex: http://bit.ly/WQuM"));
     }
 
@@ -35,7 +35,20 @@ public class TextUrlLengthenerTest extends AndroidTestCase {
 
     public void testVK() {
         assertEquals("VK: http://apriorilingva55.ru/",
-                TextUrlLengthener.lengthenUrls("VK: https://vk.com/away.php?to=http%3A%2F%2Fapriorilingva55.ru%2F%3Futm_source%3Dvk%26utm_medium%3Dsocial%26utm_campaign%3Dreferal&post=-31121583_4369"));
+                TextUrlLengthener.lengthenUrls("VK: https://vk.com/away.php?to=http%3A%2F%2Fapriorilingva55.ru%2F%3Futm_source%3Dvk%26utm_medium%3Dsocial%26utm_campaign%3Dreferal&post=-31121583_4369",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
+    public void testGPlus() {
+        assertEquals("G+: http://appsconf.ru",
+                TextUrlLengthener.lengthenUrls("G+: http://plus.url.google.com/url?q=http://appsconf.ru&rct=j&ust=1461772113919000&usg=AFQjCNGr60h5A0GeUuoh5OhP25GskDjwAQ",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
+    public void testGPlus2() {
+        assertEquals("G+: http://www.yaplakal.com/forum1/topic1367710.html",
+                TextUrlLengthener.lengthenUrls("G+: http://plus.url.google.com/url?q=http://www.yaplakal.com/forum1/topic1367710.html&rct=j&ust=1461940843242000&usg=AFQjCNFGw0r7wCS0nSRYmNzyWolCfebo1Q",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
     }
 
 }
