@@ -9,7 +9,14 @@ import java.util.regex.Pattern;
 public class TextUrlLengthener {
 
     //http://mattheworiordan.tumblr.com/post/13174566389/url-regular-expression-for-links-with-or-without-the
-    static final Pattern URL_PATTERN = Pattern.compile("((http(s)?:\\/\\/)[A-Za-z0-9.-]+((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_:/]*)#?(?:[.\\!\\/\\\\w]*))?)");
+    static final Pattern URL_PATTERN = Pattern.compile(
+            "(http(s)?:\\/\\/)" +                   // protocol
+            "[A-Za-z0-9\\.\\-]+" +                  // domain
+            "(" +                                   // optional part (
+            "(?:\\/[\\+~%\\/\\.\\w\\-_]*)?" +       // /path
+            "\\??(?:[\\-\\+=&;%@\\.\\w_:/!]*)" +    // ?query
+            "#?(?:[\\.\\!\\/\\\\w=%&\\-]*)" +       // #anchor
+            ")?");                                  // ) end of optional part
 
     public static String lengthenUrls(String text) {
         return lengthenUrls(text, DefaultLengthenerSettings.INSTANCE);
