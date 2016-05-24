@@ -14,7 +14,7 @@ public class TextUrlLengthener {
             "[A-Za-z0-9\\.\\-]+" +                  // domain
             "(" +                                   // optional part (
             "(?:\\/[\\+~%\\/\\.\\w\\-_]*)?" +       // /path
-            "\\??(?:[\\-\\+=&;%@\\.\\w_:/!]*)" +    // ?query
+            "\\??(?:[\\-\\+=&;%@\\.\\w_:/!\\?]*)" + // ?query
             "#?(?:[\\.\\!\\/\\\\w=%&\\-]*)" +       // #anchor
             ")?");                                  // ) end of optional part
 

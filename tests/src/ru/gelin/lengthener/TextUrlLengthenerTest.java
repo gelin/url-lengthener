@@ -51,4 +51,10 @@ public class TextUrlLengthenerTest extends AndroidTestCase {
                         TestLengthenerSettings.INSTANCE_NO_NETWORK));
     }
 
+    public void testGPlus3() {
+        assertEquals("G+: http://www.androidauthority.com/google-duo-693188/",
+                TextUrlLengthener.lengthenUrls("G+: http://plus.url.google.com/url?q=http://www.androidauthority.com/google-duo-693188/?utm_source%3Ddlvr.it%26utm_medium%3Dgplus&rct=j&ust=1463671453316000&usg=AFQjCNEdJDH9Ot6NbxWsPvCV_Barcdbr6Q",
+                        TestLengthenerSettings.INSTANCE_NO_NETWORK));
+    }
+
 }

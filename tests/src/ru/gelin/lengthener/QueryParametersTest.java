@@ -50,4 +50,22 @@ public class QueryParametersTest extends AndroidTestCase {
         }
     }
 
+    public void testGPlus() {
+        URI uri = URI.create(
+                "http://plus.url.google.com/url?q=http://www.androidauthority.com/google-duo-693188/?utm_source%3Ddlvr.it%26utm_medium%3Dgplus&rct=j&ust=1463671453316000&usg=AFQjCNEdJDH9Ot6NbxWsPvCV_Barcdbr6Q");
+        List<QueryParameters.Parameter> results = new ArrayList<QueryParameters.Parameter>();
+        for (QueryParameters.Parameter p : new QueryParameters(uri)) {
+            results.add(p);
+        }
+        assertEquals(4, results.size());
+        assertEquals("q", results.get(0).getName());
+        assertEquals("http://www.androidauthority.com/google-duo-693188/?utm_source=dlvr.it&utm_medium=gplus", results.get(0).getValue());
+        assertEquals("rct", results.get(1).getName());
+        assertEquals("j", results.get(1).getValue());
+        assertEquals("ust", results.get(2).getName());
+        assertEquals("1463671453316000", results.get(2).getValue());
+        assertEquals("usg", results.get(3).getName());
+        assertEquals("AFQjCNEdJDH9Ot6NbxWsPvCV_Barcdbr6Q", results.get(3).getValue());
+    }
+
 }

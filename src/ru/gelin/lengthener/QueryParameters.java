@@ -31,11 +31,11 @@ public class QueryParameters implements Iterable<QueryParameters.Parameter> {
     private final String[] pairs;
 
     public QueryParameters(URI uri) {
-        String query = uri.getQuery();
+        String query = uri.getRawQuery();
         if (query == null || query.length() == 0) {
             this.pairs = new String[] {};   //empty array
         } else {
-            this.pairs = uri.getQuery().split("&");
+            this.pairs = query.split("&");
         }
     }
 
